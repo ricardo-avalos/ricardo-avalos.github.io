@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — Applied Economics Researcher</title>
+
+  <!-- Fonts: Playfair Display (display) + Source Serif 4 (body) + DM Mono (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ─── Tokens ──────────────────────────────────────────── */
+    :root {
+      --cream:   #f5f0e8;
+      --paper:   #faf7f2;
+      --ink:     #1a1714;
+      --ink-mid: #4a4540;
+      --ink-light: #8a8078;
+      --rust:    #b85c38;
+      --rust-light: #d4795a;
+      --sage:    #5a6b5d;
+      --gold:    #c8a96e;
+      --border:  #ddd8ce;
+      --shadow:  rgba(26,23,20,0.08);
+
+      --ff-display: 'Playfair Display', Georgia, serif;
+      --ff-body:    'Source Serif 4', Georgia, serif;
+      --ff-mono:    'DM Mono', monospace;
+
+      --max-w: 1100px;
+      --nav-h: 64px;
+    }
+
+    /* ─── Reset & Base ────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Noise texture overlay ───────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-name {
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--rust);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--rust); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─── Hero ────────────────────────────────────────────── */
+    .hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      max-width: 720px;
+    }
+
+    .hero-text { }
+
+    .hero-eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name {
+      font-family: var(--ff-display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--ink-mid);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tag {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      padding: 0.3em 0.8em;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--ink-mid);
+      background: var(--cream);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--ff-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.7em 1.6em;
+      border: 1px solid;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--rust);
+      border-color: var(--rust);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--rust-light);
+      border-color: var(--rust-light);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--ink-mid);
+    }
+    .btn-outline:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    /* ─── Section Divider ─────────────────────────────────── */
+    .section-sep {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-sep hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── Section ─────────────────────────────────────────── */
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: 1.9rem;
+      font-weight: 400;
+    }
+
+    .section-more {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .section-more:hover { color: var(--rust); border-color: var(--rust); }
+
+    /* ─── Research / Papers ───────────────────────────────── */
+    .research-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .paper-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .paper-item::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--rust);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s;
+    }
+
+    .paper-item:hover::before { transform: scaleY(1); }
+    .paper-item:first-child { border-top: 1px solid var(--border); }
+
+    .paper-title {
+      font-family: var(--ff-display);
+      font-size: 1.05rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+
+    .paper-item:hover .paper-title { color: var(--rust); }
+
+    .paper-meta {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      letter-spacing: 0.04em;
+    }
+
+    .paper-journal {
+      font-family: var(--ff-body);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--sage);
+      white-space: nowrap;
+    }
+
+    .paper-status {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.25em 0.6em;
+      border-radius: 2px;
+      margin-top: 0.4rem;
+      display: inline-block;
+    }
+
+    .status-published { background: #e8f0e9; color: var(--sage); }
+    .status-wp        { background: var(--cream); color: var(--ink-light); border: 1px solid var(--border); }
+    .status-progress  { background: #f5ece8; color: var(--rust); }
+
+    /* ─── Projects Grid ───────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      background: white;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+
+    .project-thumb {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--border) 100%);
+      position: relative;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .project-card:hover .project-thumb img { transform: scale(1.04); }
+
+    .project-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--cream) 0%, #e8e2d8 100%);
+    }
+
+    .thumb-label {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    .project-card-body {
+      padding: 1.2rem 1.3rem 1.4rem;
+    }
+
+    .project-card-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card-title {
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+      line-height: 1.35;
+    }
+
+    .project-card-desc {
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-name {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+    }
+
+    .footer-col-title {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-links a {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--rust); }
+
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 2rem auto 0;
+      padding: 1.5rem 2rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      color: var(--ink-light);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Entrance animations ─────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-text > * {
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-eyebrow  { animation-delay: 0.05s; }
+    .hero-name     { animation-delay: 0.15s; }
+    .hero-bio      { animation-delay: 0.25s; }
+    .hero-tags     { animation-delay: 0.32s; }
+    .hero-actions  { animation-delay: 0.38s; }
+
+    /* ─── Responsive ──────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner  { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .footer-inner  { grid-template-columns: 1fr; }
+      .nav-links     { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Nav ─────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Your Name</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="projects.html">Applied Projects</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── Hero ─────────────────────────────────────────────── -->
+<header>
+  <div class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Applied Economics · Research · Consulting</p>
+      <h1 class="hero-name">Your Name<br/><em>Economist &amp; Researcher</em></h1>
+      <p class="hero-bio">
+        I study how policies shape individual decisions — in education, labor markets, and beyond.
+        My work combines causal inference, large-scale data, and close collaboration with
+        governments and institutions to produce research that matters in practice.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Applied Microeconomics</span>
+        <span class="tag">Causal Inference</span>
+        <span class="tag">Education Policy</span>
+        <span class="tag">Labor Markets</span>
+        <span class="tag">Policy Design</span>
+      </div>
+      <div class="hero-actions">
+        <a href="research.html" class="btn btn-primary">View Research</a>
+        <a href="projects.html" class="btn btn-outline">Applied Projects</a>
+        <a href="cv.pdf" class="btn btn-outline">Download CV</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── Featured Research ─────────────────────────────────── -->
+<section id="research">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Selected work</p>
+      <h2 class="section-title">Research</h2>
+    </div>
+    <a href="research.html" class="section-more">View all →</a>
+  </div>
+
+  <div class="research-list">
+
+    <div class="paper-item">
+      <div>
+        <p class="paper-title">Your Paper Title Goes Here</p>
+        <p class="paper-meta">with Co-Author One &amp; Co-Author Two · 2024</p>
+        <span class="paper-status status-published">Published</span>
+      </div>
+      <span class="paper-journal">Journal of [Field]</span>
+    </div>
+
+    <div class="paper-item">
+      <div>
+        <p class="paper-title">Another Interesting Paper on Policy Evaluation</p>
+        <p class="paper-meta">with Co-Author Three · 2023</p>
+        <span class="paper-status status-progress">R&amp;R</span>
+      </div>
+      <span class="paper-journal">American Economic Review</span>
+    </div>
+
+    <div class="paper-item">
+      <div>
+        <p class="paper-title">A Working Paper on a Topic You Care About</p>
+        <p class="paper-meta">Solo · 2023</p>
+        <span class="paper-status status-wp">Working Paper</span>
+      </div>
+      <span class="paper-journal">NBER Working Paper No. XXXXX</span>
+    </div>
+
+    <div class="paper-item">
+      <div>
+        <p class="paper-title">An Earlier Published Study</p>
+        <p class="paper-meta">with Co-Author Four · 2022</p>
+        <span class="paper-status status-published">Published</span>
+      </div>
+      <span class="paper-journal">Quarterly Journal of Economics</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-sep"><hr/></div>
+
+<!-- ─── Featured Projects ─────────────────────────────────── -->
+<section id="projects">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Applied work</p>
+      <h2 class="section-title">Applied Projects</h2>
+    </div>
+    <a href="projects.html" class="section-more">View all →</a>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-thumb">
+        <!-- <img src="images/projects/project1.jpg" alt="Project 1"/> -->
+        <div class="project-thumb-placeholder">
+          <span class="thumb-label">Add image</span>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <p class="project-card-tag">Impact Evaluation</p>
+        <h3 class="project-card-title">Project One: Descriptive Title</h3>
+        <p class="project-card-desc">Short description of what this project did, where, and what you found or built.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb">
+        <div class="project-thumb-placeholder">
+          <span class="thumb-label">Add image</span>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <p class="project-card-tag">Policy Design</p>
+        <h3 class="project-card-title">Project Two: Another Initiative</h3>
+        <p class="project-card-desc">A brief line on the context, the methods used, and the impact or takeaway.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb">
+        <div class="project-thumb-placeholder">
+          <span class="thumb-label">Add image</span>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <p class="project-card-tag">Data &amp; Tools</p>
+        <h3 class="project-card-title">Project Three: A Technical Tool</h3>
+        <p class="project-card-desc">Describe the software, dataset, or tool and who it is for.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── Footer ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-name">Your Name</p>
+      <p class="footer-tagline">Applied Economist &amp; Researcher</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sections</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="projects.html">Applied Projects</a></li>
+        <li><a href="cv.html">CV</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <ul class="footer-links">
+        <li><a href="/cdn-cgi/l/email-protection#e891879da88d85898184c68b8785"><span class="__cf_email__" data-cfemail="5c2533291c39313d3530723f3331">[email&#160;protected]</span></a></li>
+        <li><a href="https://github.com/yourusername" target="_blank">GitHub</a></li>
+        <li><a href="https://twitter.com/yourhandle" target="_blank">Twitter / X</a></li>
+        <li><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foote
