@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Build output
+_site/
+dist/
+.jekyll-cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
