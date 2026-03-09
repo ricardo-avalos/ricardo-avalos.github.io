@@ -1,0 +1,1220 @@
+%=============================================================================
+% "Is there always time for everything?
+%  How time allocation affects cognitive skill development during school years"
+%
+% Ricardo Antonio Avalos Uribe
+% Economics paper format — converted from BA thesis (PUCP, 2021)
+%=============================================================================
+
+\documentclass[12pt]{article}
+
+%--- Packages -----------------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage[round,authoryear]{natbib}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{caption}
+
+%--- Spacing ------------------------------------------------------------------
+\onehalfspacing
+
+%--- Notation convenience macros ---------------------------------------------
+% NDC = Cognitive Development Level (Nivel de Desarrollo Cognitivo)
+\newcommand{\NDC}{\mathrm{NDC}}
+% Subscript shorthands
+\newcommand{\child}{\text{child}}
+\newcommand{\cg}{\text{cg}}   % caregiver
+
+%=============================================================================
+\begin{document}
+%=============================================================================
+
+%--- Title block --------------------------------------------------------------
+\title{\textbf{Is there always time for everything?}\\
+       \large How time allocation affects cognitive skill development\\
+       during school years}
+
+\author{Ricardo Antonio Avalos Uribe\thanks{
+  Email: \href{mailto:ricardo.avalos@pucp.edu.pe}{ricardo.avalos@pucp.edu.pe}.
+  I am grateful to Jos\'{e} Rodr\'{i}guez Gonz\'{a}les for guidance and
+  to the Young Lives study for making the data available.}}
+
+\date{December 2021}
+
+\maketitle
+\thispagestyle{empty}
+
+%--- Abstract -----------------------------------------------------------------
+\begin{abstract}
+\noindent
+This paper examines how children's time allocation across competing
+activities—work, household chores, caregiving, and leisure—affects the
+development of their cognitive skills during school years. Drawing on the
+household decision-making framework and the educational production function,
+I derive a value-added empirical specification and estimate it using five
+rounds (2002–2016) of the Young Lives longitudinal survey for Peru.
+The sample consists of adolescents aged approximately 15 in Round~5, and
+cognitive development is measured by the Peabody Picture Vocabulary Test
+(PPVT). Results show that time devoted to household chores and work outside
+the home has a significant negative contemporaneous effect on PPVT scores.
+Long-term negative effects are found for chores and early-age work (around
+age~8). When the sample is disaggregated by sex and area of residence,
+household chores primarily affect urban girls, while work primarily affects
+boys—with contemporaneous effects for rural boys and long-term effects for
+urban boys. These findings motivate low-cost informational policies targeting
+parental awareness of the costs of early child labor and intensive household
+task assignments.
+
+\medskip
+\noindent\textbf{JEL Codes:}~I24, J22, O15, D13
+
+\noindent\textbf{Keywords:}~time use, cognitive development, child labor,
+household chores, educational production function, Peru, value-added model
+\end{abstract}
+
+\newpage
+\setcounter{page}{1}
+
+%=============================================================================
+\section{Introduction}
+\label{sec:intro}
+%=============================================================================
+
+Education is arguably one of the most relevant topics when discussing a
+nation's economic and social development. A particular view from the
+perspective of human capital is that developed by \citet{becker1964}, who
+suggests that education and the development of technical skills are themselves
+human capital, since they allow access to future economic returns.
+Subsequently, education as human capital would be extrapolated to its
+importance in macroeconomic terms as a main component of growth and production
+\citep{barro2002, romer1989}. On the other hand, a more holistic view suggests
+that education or the development of cognitive skills is fundamental to social
+development not only due to its economic returns, but also because it improves
+the decision-making process regarding health, resource usage, and morality
+\citep{busemeyer2018}. In short, education plays a fundamental role in
+development in its broadest sense.
+
+Related to these perspectives, Peru experienced significant progress in
+education access: attendance rates in primary and secondary education in 2019
+were around 97\% and 82\%, respectively. Additionally, school dropout rates
+fell from 20\% to 6\% for primary school, and from 24\% to 11\% for secondary
+school when comparing 2000 with 2015. This shows that access to education has
+significantly improved. However, based on knowledge acquisition, the current
+national status does not seem positive. Regarding expected learning outcomes
+in reading comprehension, only 50\% of primary school students meet the
+established expectation, while this figure drops to just 15\% for secondary
+school students. The PISA tests present a similar scenario: compared to its
+peers in the South American region, Peru ranks last in all learning
+competencies \citep{minedu2019}. This reveals an urgent need to address the
+educational challenge in terms of learning and skills acquisition, beyond
+general education access rates.
+
+Local literature has emphasized that living conditions, health status,
+infrastructure, and teacher quality are key determinants of cognitive
+development. On the one hand, poverty and poor nutrition during early childhood
+have a negative effect on learning acquisition \citep{grantham2007,
+sanchez2013}. On the other hand, studies related to the impact of school
+infrastructure on learning outcomes point to moderate impacts, especially in
+rural contexts where there is a lack of basic school infrastructure
+\citep{campana2014}.
+
+All of these research efforts contribute to a better understanding of learning
+acquisition. However, factors more endogenous to the household and its
+members—such as motivation, perceptions of the importance of education, and
+time use—have not been as prominent in studies addressing cognitive
+development. The use of time by school-aged children is particularly relevant
+to this matter. Given that time is a scarce resource, when learning activities
+are shared with other activities such as work, chores, or caregiving, cognitive
+development could be jeopardized. This is relevant in Peru considering that
+the school-grade repetition rate among children who work is 30\%, while among
+non-working children it is 18\%. These statistics reveal a negative association
+between children's time on activities outside of school and their learning
+outcomes. Some qualitative studies indicate that this occurs especially during
+adolescence, where the type of working activity is usually exposed to more
+risks as the child starts joining the informal labor market
+\citep{rojas2013}.
+
+In this context, this research seeks to contribute to the national research
+literature by providing empirical evidence on how children's time use affects
+the development of their cognitive skills. Furthermore, it explores how
+household geographical location and gender differences influence time use and,
+consequently, impact cognitive development. The paper is structured as follows.
+Section~\ref{sec:framework} presents a conceptual review emphasizing the
+tradition of household decision-making models and the educational production
+function. Section~\ref{sec:hypotheses} states the main hypotheses.
+Section~\ref{sec:data} describes the data and stylized facts.
+Section~\ref{sec:methodology} derives and discusses the econometric
+specification. Section~\ref{sec:results} presents the estimation results.
+Section~\ref{sec:conclusions} concludes with reflections and policy proposals.
+
+%=============================================================================
+\section{Conceptual Framework}
+\label{sec:framework}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Household decisions about time use}
+\label{subsec:timeuse}
+%-----------------------------------------------------------------------------
+
+Time is a resource in the household that is considered scarce for all members.
+Just as income has different uses, time can likewise be allocated to one purpose
+or another depending on preferences and exogenous factors. A first approach to
+these decisions and their connection to human capital formation was developed by
+\citet{becker1994} in his work \textit{Human Capital}. Becker develops a
+conceptualization where the use of time by each household member will have an
+opportunity cost, which by convention would be the market wage. In this sense,
+any use of time allocated for an activity other than work will have an
+associated cost equal to the lost wage. This leads to the explicit inclusion
+of time dedicated to education as human capital formation, where the associated
+cost is offset by the higher wage expected in the future. This model allows
+for the analysis of different contexts of the household and its members
+regarding their use of time. For example, if a household has scarce economic
+resources, the benefit of all its members contributing wages to family income
+would have to be compared with the future benefit of some of them allocating
+time to learning (human capital formation).
+
+Within that framework, multiple empirical studies have attempted to test the
+contexts in which children allocate time to work and education. It has been
+observed that the time children allocate to work does not increase when wages
+are high in the labor market because parents can find higher-paying jobs and
+education would allow access to higher-paying jobs in the future
+\citep{laszlo2008}. This is aligned with the Beckerian expectation extension,
+where time decisions depend not only on current benefits but also on
+perceptions of returns. Some observational studies have found that decisions
+regarding schooling and time devoted to learning depend on perceptions of
+returns, which in turn depend on the economic situation of the geographic
+location and the labor market \citep{jensen2010, attanasio2009}. In addition,
+qualitative evidence supports that in households where parents are self-employed
+in agriculture, commerce, textiles, and other fields, there is a higher
+prevalence of children's participation in family work \citep{rojas2013}. It
+is therefore essential to understand that the basic determinants of the
+Beckerian model—wages and future returns—are circumscribed by household
+characteristics, and thus time-use decisions related to work and education
+depend on these factors.
+
+In addition to decisions about time spent on work and learning, there are also
+decisions about how to use time for activities such as housework or caregiving.
+Similar to time spent on education, based on the Beckerian model, decisions
+about spending time on household chores and caregiving depend primarily on
+potential income; however, they also depend on individual characteristics such
+as sex, age, and household characteristics \citep{garcia2007}. In this regard,
+empirical evidence indicates that female children spend most of their time on
+household activities, and even when they do spend some time working, they spend
+more time on household chores, with a higher prevalence among adolescents in
+rural households \citep{garcia2007, zapata2010}. This shows that decisions
+about time use, particularly regarding housework, are significantly determined
+by gender roles and family characteristics.
+
+%-----------------------------------------------------------------------------
+\subsection{The generation of cognitive skills}
+\label{subsec:cogskills}
+%-----------------------------------------------------------------------------
+
+The development of cognitive skills is understood as a process that depends on
+a series of factors directly related to the environment through which learning
+is acquired (the school and related aspects), as well as external factors. In
+the international literature, this process is typically analyzed through the
+educational production function. For example, \citet{glewwe2002}, building on
+the Cobb--Douglas production function, specifies the inputs that determine
+educational outcomes. He proposes three groups of fundamental factors: (i)
+individual or household characteristics (demand); (ii) the quality of the
+school and teachers (supply); and (iii) the individual's years of schooling.
+This theoretical relationship allows us to describe what types of factors are
+involved in the process of human capital formation.
+
+This specification is well supported empirically. Many local and international
+studies use this framework as a basis for estimation. On the one hand,
+international evidence suggests that supply-side factors are of utmost
+importance for educational performance. A meta-analysis by \citet{fuller1987}
+shows that the quality of educational materials, expenditure per student, and
+teacher quality are estimated to have a positive impact in the majority of
+empirical studies (more than 50\%). On the other hand, local evidence suggests
+that supply-side factors such as school equipment, type of institution, and
+perceptions of teacher quality are highly important at all levels. Similarly,
+regarding demand, there is some consensus on factors such as gender, native
+language, and access to basic services \citep{miranda2008, jopen2014}. In
+short, both supply and demand conditions must be considered when analyzing
+educational performance, and the educational production function framework
+allows us to elucidate which determinants to include in the analysis.
+
+%-----------------------------------------------------------------------------
+\subsection{Time distribution as a determinant of cognitive skill development}
+\label{subsec:timedeterminant}
+%-----------------------------------------------------------------------------
+
+As previously reviewed, children's time allocation is directed toward different
+activities that frequently compete for prevalence. Among these activities is
+time dedicated to education or learning, which is a fundamental component for
+the acquisition of cognitive skills. In this sense, any determinant that
+directly affects time allocation will end up indirectly affecting the
+development of cognitive skills.
+
+In principle, under the models described in the previous sections, the use of
+time in educational activities has a positive effect on cognitive development.
+Meanwhile, time spent on other activities—such as household chores, family
+work, or work outside the home—would have an effect that depends on the
+household context or social determinants such as gender.
+
+First, regarding the effect of time dedicated to education, evidence supports
+the idea that more time devoted to learning allows for greater cognitive
+development. Specifically, the more time devoted to learning in school or
+outside of school, the lower the likelihood of grade repetition (a proxy for
+learning acquisition). Additionally, this time dedicated by the child is
+complemented by time dedicated by parents in the form of help or support in
+the learning process \citep{beltran2013}. This shows that time dedicated to
+studying—whether by the child himself or by the parents—has a positive effect
+on learning outcomes. Consequently, any alternative use of time that limits
+time in education would have an indirect and negative effect on cognitive
+development.
+
+Second, there is no consistent theoretical prediction regarding the effect of
+hours spent working outside and inside the home, and empirical evidence on its
+effects on cognitive development is mixed. In general, empirical results show
+that longer hours spent working decrease cognitive development or learning
+acquisition measured as academic delay \citep{beltran2013}. However, when
+work is separated into that performed inside and outside the home, family work
+begins to have a positive relationship with cognitive development, although
+only in rural areas \citep{ponce2012}. Additionally, an improvement in wages
+causes time spent working to decrease in favor of education in the presence
+of greater future returns \citep{beltran2013}. Therefore, the type of work
+activity, the structure of the family economy, and market conditions determine
+the effect that hours spent working can have on cognitive development outcomes.
+
+Finally, regarding hours dedicated to household activities, similar to any
+other activity alternative to education, the effect on cognitive development
+will depend on the intensity of the time dedicated as well as specific social
+determinants. In this regard, the time dedicated to household activities is
+greater for women than for men, both due to social structures and differences
+in returns to the labor market \citep{garcia2007}. Additionally, the presence
+of the mother at home or of a female figure in the home allows the time
+dedicated to household chores to decrease, especially for girls, generating a
+positive effect on schooling as they have more time for education
+\citep{njie2015, levison1998}. Thus, regarding household chores, the
+fundamental determinant of time distribution and, consequently, cognitive
+development would be the family composition and the sex of the child.
+
+In short, the conceptual and empirical evidence on time use and cognitive
+development clearly demonstrates the existence of determinants beyond salary
+as a counterpart to time use. On the one hand, the relationship between time
+use in work activities (inside or outside the home) and the development of
+cognitive skills will depend on the structure of the family economy and labor
+market conditions. On the other hand, the relationship between time use in
+household activities (caregiving and chores) and cognitive development is
+closely related to family structure and gender roles.
+
+%=============================================================================
+\section{Hypothesis Statement}
+\label{sec:hypotheses}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{General hypothesis}
+\label{subsec:genhyp}
+%-----------------------------------------------------------------------------
+
+\textbf{General hypothesis:} The distribution of time among boys and girls
+affects the development of their cognitive skills.
+
+The development of cognitive skills, from the most general perspective through
+the cognitive skills production function, is determined by a series of factors.
+One of these factors is the allocation of time use, both because it determines
+the time resources directly devoted to learning activities and because the use
+of time in activities such as work or household chores has indirect impacts on
+the development of cognitive skills.
+
+%-----------------------------------------------------------------------------
+\subsection{Hypothesis 1: Contemporary and long-term effects}
+\label{subsec:hyp1}
+%-----------------------------------------------------------------------------
+
+\textbf{Hypothesis 1:} There are contemporaneous and long-term effects of
+time use on the development of cognitive skills.
+
+Evidence suggests that the distribution of children's time use affects the
+development of their cognitive skills contemporaneously. Whether working inside
+or outside the home, or performing domestic activities, the use of time in
+activities other than learning has an immediate effect on the acquisition of
+cognitive skills by limiting the time devoted to learning and by having
+indirect effects on motivation or the perception of the benefits of education.
+Furthermore, these contemporaneous effects have an impact on future cognitive
+development, as reflected in the higher rates of school failure among those
+who devote time to work or activities other than learning.
+
+%-----------------------------------------------------------------------------
+\subsection{Hypothesis 2: Differential effects by gender and area of residence}
+\label{subsec:hyp2}
+%-----------------------------------------------------------------------------
+
+\textbf{Hypothesis 2:} There are differences by gender and area of residence
+in the impact that time use has on cognitive development.
+
+The impacts of time use on cognitive development are differentiated by the
+child's gender and area of residence. This is particularly true because the
+presence of gender roles makes home-based activities more prevalent for girls
+and adolescents, which means this group sees their time devoted to education
+limited and, therefore, achieves less cognitive development than their male
+peers. Furthermore, the area of residence is crucial as it helps delineate
+households where family-based economic structures predominate and where labor
+markets are not as dynamic as to reduce the hours invested in education due
+to lower returns.
+
+%=============================================================================
+\section{Data and Stylized Facts}
+\label{sec:data}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Sources of information}
+\label{subsec:datasources}
+%-----------------------------------------------------------------------------
+
+The data source used is the international Young Lives study, known in Peru as
+\textit{Ni\~{n}os del Milenio} (Children of the Millennium). This is an
+international longitudinal study of child poverty that began in 2002 and
+followed 12,000 children of low and middle income in four countries: Ethiopia,
+India, Peru, and Vietnam. It was designed to understand how child poverty
+impacts development. To achieve this, two age cohorts are followed throughout
+childhood, adolescence, and adulthood, allowing comparisons of the same
+individuals over time.
+
+The study conducted five survey rounds between 2002 and 2016. During this
+period, large-scale household surveys were conducted targeting all children
+and their primary caregiver, in addition to in-depth interviews, group work,
+and case studies with subsamples of children, parents or caregivers, teachers,
+and community officials.
+
+Since the emphasis of this paper is on time use and the development of
+cognitive skills, some regularities deserve attention. On the one hand,
+reports on time use come from two sources: primary caregivers (parents or
+guardians) and the child themselves. For children under 12 years of age,
+only the caregiver's report is available; those between 12 and 15 years of
+age have both reports; and those over 15 years of age self-report their time
+use. On the other hand, regarding information on cognitive development, there
+are three types of tests: the Peabody Picture Vocabulary Test (PPVT), the
+verbal test, and the mathematics test. Of these, only the PPVT is available
+from the second round onwards (from age~5). The structure of the Young Lives
+dataset is summarized in Appendix~\ref{app:data}.
+
+%-----------------------------------------------------------------------------
+\subsection{Sample and main variables}
+\label{subsec:sample}
+%-----------------------------------------------------------------------------
+
+Given the study's objective, the youngest cohort from Round~5 (around 15 years
+of age) was chosen as the main sample. This choice was based on the timeliness
+of the data (2016) and because during this stage, time distribution is more
+variable across different activity categories, as during adolescence there is
+a tendency to engage in activities other than education, especially in adverse
+contexts. It should be noted that while Round~5 is the main sample for
+empirical results, variables from previous rounds are used to estimate
+long-term effects.
+
+\begin{table}[ht]
+\centering
+\caption{Main variables of the study}
+\label{tab:mainvars}
+\begin{tabular}{lp{9cm}}
+\toprule
+\textbf{Variable} & \textbf{Description} \\
+\midrule
+\multicolumn{2}{l}{\textit{Dependent variable}} \\
+PPVT score & Score obtained in the Peabody Picture Vocabulary Test \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Main independent variables}} \\
+Child's leisure time       & Time spent on leisure activities (sleeping, eating, playing, etc.) \\
+Child's time on chores     & Time spent on household chores (cleaning, tidying, cooking, etc.) \\
+Child's time on caregiving & Time spent on caregiving activities for a family member at home \\
+Child's time on work       & Time spent on work activities both inside and outside the family environment \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\subsection{Stylized facts}
+\label{subsec:stylizedfacts}
+%-----------------------------------------------------------------------------
+
+To explore the feasibility of the proposed hypotheses, a descriptive analysis
+of the relationship between cognitive development (measured by the PPVT score)
+and the various time uses was conducted. Table~\ref{tab:descriptive} presents
+the average PPVT score obtained in Round~5 by activity performed and the
+rounds in which it was performed.
+
+\begin{table}[ht]
+\centering
+\caption{Average PPVT score in Round 5 by time use and survey round of
+activity}
+\label{tab:descriptive}
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{6}{c}{\textbf{Round(s) in which the activity was performed}} \\
+\cmidrule(lr){2-7}
+\textbf{Activity} & None & R5 only & R4--5 & R3 only & R3--4 & R3--4--5 \\
+\midrule
+Chores
+  & 87.01 & 80.58 & 80.75 & 81.68 & 80.20 & 74.27 \\
+  & [29]  & [79]  & [335] & [21]  & [123] & [989] \\
+\addlinespace
+Caregiving
+  & 78.87 & 79.34 & 76.06 & 76.69 & 74.44 & 73.20 \\
+  & [600] & [134] & [244] & [89]  & [183] & [215] \\
+\addlinespace
+Family work
+  & 80.26 & 77.12 & 72.98 & 71.85 & 67.00 & 63.61 \\
+  & [1052]& [94]  & [91]  & [106] & [87]  & [53]  \\
+\addlinespace
+Market work
+  & 77.38 & 69.84 & 74.13 & 73.87 &  ---  &  ---  \\
+  & [1655]& [53]  & [3]   & [6]   & [0]   & [0]   \\
+\bottomrule
+\multicolumn{7}{l}{\footnotesize Notes: Number of observations in brackets.
+Source: Young Lives. Authors' calculations.}
+\end{tabular}
+\end{table}
+
+For all activities except market work, performing the activity contemporaneously
+(in Round~5) is associated with a decrease in the PPVT score obtained in the
+same round. This decrease is sustained if the activity has been performed since
+Round~4, and a significant decrease occurs when the activity is performed
+predominantly (from Round~3 to Round~5). Furthermore, a long-term descriptive
+relationship is observed, since performing the activity only in Round~3 (age~8)
+is associated with obtaining a lower PPVT score in Round~5 (age~15). Therefore,
+this descriptive exercise shows evidence that the use of time in activities
+other than education could have effects on the development of cognitive skills.
+The objective of the empirical methodology is to obtain causal results to
+confirm these preliminary observations.
+
+%=============================================================================
+\section{Methodology and Empirical Specification}
+\label{sec:methodology}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Derivation of the cognitive development equation}
+\label{subsec:derivation}
+%-----------------------------------------------------------------------------
+
+To consistently analyze how time use affects the development of cognitive
+skills, I start from the household's decision-making framework regarding time
+use throughout the life cycle. This would be a two-member household—caregiver
+and child—whose consumption depends not only on market goods $X_{t}^{j}$, but
+also on the use of time to make such consumption effective
+$T_{t}^{j}$ \citep{becker1993}. Furthermore, the child's level of cognitive
+development $\NDC_{\child,t}$ is a component that gives utility to the
+household and follows a process of accumulation throughout the life cycle
+\citep{benporath1967}. The household optimization problem is:
+
+\begin{equation}
+  \max \; U = u(C_1, C_2, \ldots, C_T)
+  \label{eq:utility}
+\end{equation}
+
+\begin{equation}
+  C_t = f_c\!\left(\NDC_{\child,t},\; C_t^{TD},\; C_t^{O}\right)
+  \label{eq:consumption}
+\end{equation}
+
+\begin{equation}
+  C_t^{j} = f_j\!\left(X_t^{j},\, T_t^{j}\right)
+  \qquad \forall\, j \in \{O,\, TD\}
+  \label{eq:subconsumption}
+\end{equation}
+
+where $O$ denotes leisure and $TD$ denotes domestic tasks. The child's
+cognitive development is governed by an accumulation equation:
+
+\begin{equation}
+  \NDC_{\child,t} = \NDC_{\child,t-1} + F(A_0,\, E_t,\, Q,\, N,\, H,\, I)
+  \label{eq:ndc}
+\end{equation}
+
+\begin{equation}
+  E_t = f_E\!\left(A_0,\; T_t^{E},\; X_t^{E},\; Q,\; N,\; H,\; P_t\right)
+  \label{eq:education}
+\end{equation}
+
+where $A_0$ is innate ability, $E_t$ is educational achievement at period $t$,
+$Q$ is school quality, $N$ are child characteristics, $H$ are household
+characteristics, $I$ is an indicator of the informational environment, and
+$P_t$ is the price level. The system is completed with the household budget
+constraint:
+
+\begin{equation}
+  P_t X_t = Y_0 + Y\!\left(\hat{W}_t,\, T_t^{TM}\right)
+            + Y\!\left(X_t^{TF},\, T_t^{TF},\, P_t\right)
+  \label{eq:budget}
+\end{equation}
+
+where $TM$ denotes market work, $TF$ denotes family work, $\hat{W}_t$ is the
+market wage, and $Y_0$ is autonomous income. The time constraint is:
+
+\begin{equation}
+  T = T_t^{O} + T_t^{TD} + T_t^{E} + T_t^{TF} + T_t^{TM}
+  \label{eq:timeconstraint}
+\end{equation}
+
+A detailed derivation of the full system and its solution is presented in
+Appendix~\ref{app:model}. The optimal time allocation by household members
+depends on a set of exogenous factors. With this result, equation~\eqref{eq:ndc}
+is evaluated at the optimum, yielding:
+
+\begin{equation}
+  \NDC_{\child,t} = \NDC_{\child,t-1}
+    + F\!\left(T_t^{O(*)},\; T_t^{TD(*)},\; T_t^{TF(*)},\; T_t^{TM(*)},\;
+               X_t^{E(*)},\; A_0,\; Q,\; N,\; H,\; I,\; P_t\right)
+  \label{eq:ndcoptimal}
+\end{equation}
+
+Equation~\eqref{eq:ndcoptimal} provides a specification of the relationship
+between the various uses of household members' time and their relationship to
+the level of cognitive development. This is consistent with the household's
+decision-making framework, since time is a limited resource and there will be
+competition for time allocation. Consequently, more time devoted to leisure,
+housework, or forms of work decreases the time actually devoted to school and,
+consequently, to the development of cognitive skills.
+
+%-----------------------------------------------------------------------------
+\subsection{Empirical specification}
+\label{subsec:empirical}
+%-----------------------------------------------------------------------------
+
+In order to empirically analyze the relationship between the level of cognitive
+development and alternative uses of time, the function derived in
+equation~\eqref{eq:ndcoptimal} is assumed to be linear. Furthermore,
+considering that cognitive development is an accumulation process, a
+specification can be derived that depends on the history of time distribution
+and exogenous components, in addition to measurement error:
+
+\begin{equation}
+  \NDC_{\child,T} = \beta_0 + \beta_1\,\NDC_{\child,0}
+    + \sum_{t=1}^{T} \sum_{j \in \{O,\,TD,\,TF,\,TM\}}
+      T_{t}^{j(*)} \cdot \beta_{t}^{j}
+    + \mathrm{Exogenous}_{t} \cdot \delta_{t}
+    + \varepsilon_{T}
+  \label{eq:valueadded}
+\end{equation}
+
+One possible method of direct estimation is ordinary least squares (OLS).
+However, this would be biased due to omitted variables and selection. A direct
+source of omitted-variable bias is the innate ability component $A_0$ and
+household preferences for education. Both variables are unobservable and
+directly impact the development of cognitive skills; their omission implies
+biased estimates. On the other hand, both variables, being exogenous,
+determine time allocation, generating selection bias since they are unobserved.
+This concern is well documented in the literature of empirical estimates of
+educational outcomes \citep{glewwe2020, webbink2005}.
+
+Consequently, two viable estimation options are considered: a value-added type
+estimation and estimation by instrumental variables. The value-added model is
+proposed as the baseline option, since the information provided by the Young
+Lives study allows for the adequate incorporation of a rich set of controls to
+limit estimation bias. Furthermore, the specification in
+equation~\eqref{eq:valueadded} directly accommodates the assumption that the
+current outcome is determined by the accumulation of results from past periods.
+Table~\ref{tab:modelvars} shows the variables used to build the model.
+
+\begin{table}[ht]
+\centering
+\caption{Model variable specification}
+\label{tab:modelvars}
+\begin{tabular}{lp{9cm}}
+\toprule
+\textbf{Variable} & \textbf{Description} \\
+\midrule
+\multicolumn{2}{l}{\textit{Dependent variable}} \\
+PPVT score & Score obtained in the Peabody Picture Vocabulary Test \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Main independent variables}} \\
+Child's leisure time       & Time spent on leisure (sleeping, eating, playing, etc.) \\
+Child's time on chores     & Time spent on household chores (cleaning, tidying, cooking, etc.) \\
+Child's time on caregiving & Time spent on caregiving activities for a family member \\
+Child's time on work       & Time spent on work activities inside and outside the family \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Additional controls}} \\
+Child characteristics      & Nutritional status, preschool attendance, ongoing illness, etc. \\
+Parental characteristics   & Age, highest level of education, legal marital status, etc. \\
+School characteristics     & Teacher absence, travel time to school, type of institution, etc. \\
+Household characteristics  & Region or area of residence, access to water and sanitation, wealth index, etc. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%=============================================================================
+\section{Estimation Results}
+\label{sec:results}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{General results}
+\label{subsec:general}
+%-----------------------------------------------------------------------------
+
+As a first result, the model is estimated for all individuals in Round~5
+without subdivision by urban/rural area or by sex. From this perspective, the
+estimated coefficients indicate the average relationship between time use and
+the PPVT test result in Round~5. Table~\ref{tab:general} shows the results of
+the standardized coefficients from this first estimation.
+
+\begin{table}[ht]
+\centering
+\caption{General level estimate}
+\label{tab:general}
+\begin{tabular}{lc}
+\toprule
+ & \textbf{PPVT Score (Round 5)} \\
+\midrule
+\multicolumn{2}{l}{\textit{Round 5 (contemporaneous)}} \\
+\quad Chores  & $-0.075^{**}$ \\
+              & $(0.484)$ \\
+\quad Caregiving & $-0.002$ \\
+              & $(0.423)$ \\
+\quad Leisure & $-0.086^{***}$ \\
+              & $(0.256)$ \\
+\quad Work    & $-0.043$ \\
+              & $(0.359)$ \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Round 4}} \\
+\quad Chores  & $-0.003$ \\
+              & $(0.585)$ \\
+\quad Caregiving & $-0.005$ \\
+              & $(0.444)$ \\
+\quad Leisure & $-0.030$ \\
+              & $(0.266)$ \\
+\quad Work    & $-0.018$ \\
+              & $(0.401)$ \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Round 3 (long-term)}} \\
+\quad Chores  & $-0.054^{*}$ \\
+              & $(0.623)$ \\
+\quad Caregiving & $-0.011$ \\
+              & $(0.508)$ \\
+\quad Leisure & $\phantom{-}0.007$ \\
+              & $(0.280)$ \\
+\quad Work    & $-0.061^{*}$ \\
+              & $(0.648)$ \\
+\addlinespace
+$N$           & $1{,}188$ \\
+$R^2$         & $0.455$ \\
+Controls      & Yes \\
+\bottomrule
+\multicolumn{2}{l}{\footnotesize Standardized coefficients reported; standard
+errors in parentheses.} \\
+\multicolumn{2}{l}{\footnotesize $^{*}p<0.05$, $^{**}p<0.01$,
+$^{***}p<0.001$.}
+\end{tabular}
+\end{table}
+
+This first result highlights a long-term relationship between time use at work
+and chores, and a contemporaneous relationship between time use on chores.
+Specifically, the three aforementioned activities have a negative impact on
+the measure of cognitive development. Regarding time use at work, the result
+is consistent with the reviewed literature, as working at an early age (8
+years) does not provide sufficient household income to compensate for the time
+spent on such activities. On the other hand, chores also have a negative
+impact both in the long term and contemporaneously. This makes sense because
+such activities do not have a compensation—such as wages—to offset the effect
+of the decrease in available time. Additionally, if the activity is performed
+at an early and critical age (around 8 years), there will be limited time for
+the development of cognitive skills.
+
+%-----------------------------------------------------------------------------
+\subsection{Results by area of residence and sex}
+\label{subsec:heterogeneity}
+%-----------------------------------------------------------------------------
+
+A second set of results is presented in terms of different estimates by area
+of residence and individual sex. This is because the literature suggests that
+time allocation and educational outcomes diverge when these two variables are
+combined. Table~\ref{tab:heterogeneity} presents the estimation results.
+
+\begin{table}[ht]
+\centering
+\caption{Estimates by area of residence and sex}
+\label{tab:heterogeneity}
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Urban}} & \multicolumn{2}{c}{\textbf{Rural}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & \textbf{Boy} & \textbf{Girl} & \textbf{Boy} & \textbf{Girl} \\
+\midrule
+\multicolumn{5}{l}{\textit{Round 5 (contemporaneous)}} \\
+\quad Chores
+  & $-0.007$       & $-0.109^{*}$  & $-0.120$      & $-0.127$ \\
+  & $(0.863)$      & $(0.759)$     & $(2.080)$     & $(1.476)$ \\
+\quad Caregiving
+  & $\phantom{-}0.015$ & $\phantom{-}0.013$ & $-0.067$ & $-0.021$ \\
+  & $(0.659)$      & $(0.696)$     & $(1.871)$     & $(1.433)$ \\
+\quad Leisure
+  & $-0.042$       & $-0.114^{*}$  & $\phantom{-}0.008$ & $-0.165$ \\
+  & $(0.432)$      & $(0.424)$     & $(0.943)$     & $(0.902)$ \\
+\quad Work
+  & $-0.036$       & $-0.014$      & $-0.237^{**}$ & $\phantom{-}0.104$ \\
+  & $(0.683)$      & $(0.618)$     & $(0.935)$     & $(1.251)$ \\
+\addlinespace
+\multicolumn{5}{l}{\textit{Round 4}} \\
+\quad Chores
+  & $\phantom{-}0.021$ & $\phantom{-}0.000$ & $-0.053$ & $\phantom{-}0.050$ \\
+  & $(0.921)$      & $(0.987)$     & $(2.019)$     & $(1.987)$ \\
+\quad Caregiving
+  & $-0.023$       & $\phantom{-}0.013$ & $-0.005$ & $\phantom{-}0.032$ \\
+  & $(0.750)$      & $(0.680)$     & $(1.813)$     & $(1.540)$ \\
+\quad Leisure
+  & $-0.059$       & $-0.029$      & $\phantom{-}0.006$ & $\phantom{-}0.023$ \\
+  & $(0.409)$      & $(0.434)$     & $(1.035)$     & $(0.974)$ \\
+\quad Work
+  & $\phantom{-}0.045$ & $-0.012$  & $-0.136$      & $\phantom{-}0.092$ \\
+  & $(0.730)$      & $(0.769)$     & $(1.044)$     & $(1.217)$ \\
+\addlinespace
+\multicolumn{5}{l}{\textit{Round 3 (long-term)}} \\
+\quad Chores
+  & $-0.065$       & $-0.027$      & $-0.229^{*}$  & $\phantom{-}0.029$ \\
+  & $(0.997)$      & $(1.006)$     & $(2.211)$     & $(2.249)$ \\
+\quad Caregiving
+  & $\phantom{-}0.018$ & $-0.004$  & $\phantom{-}0.040$ & $-0.115$ \\
+  & $(0.830)$      & $(0.834)$     & $(2.068)$     & $(1.666)$ \\
+\quad Leisure
+  & $-0.021$       & $-0.006$      & $-0.059$      & $\phantom{-}0.073$ \\
+  & $(0.448)$      & $(0.423)$     & $(1.280)$     & $(0.998)$ \\
+\quad Work
+  & $-0.094^{*}$   & $-0.081$      & $-0.084$      & $\phantom{-}0.103$ \\
+  & $(1.314)$      & $(1.583)$     & $(1.573)$     & $(1.581)$ \\
+\addlinespace
+$N$  & $472$  & $418$  & $142$  & $156$ \\
+$R^2$ & $0.403$ & $0.449$ & $0.653$ & $0.628$ \\
+Controls & Yes & Yes & Yes & Yes \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Standardized coefficients reported; standard
+errors in parentheses.} \\
+\multicolumn{5}{l}{\footnotesize $^{*}p<0.05$, $^{**}p<0.01$,
+$^{***}p<0.001$.}
+\end{tabular}
+\end{table}
+
+For boys, the use of time spent working always has a negative effect.
+Particularly in urban areas, this impact is only observed as a long-term
+effect, consistent with the fact that early employment does not generate a
+significant income counterpart and the type of work in urban areas tends to
+limit cognitive development outcomes. In rural areas, the impact is rather
+contemporaneous and is linked to the presence of more time- and effort-intensive
+work, a recurring theme given the type of activity in rural areas. It is also
+observed that chores have a negative effect in rural areas, probably because
+they limit available time without an offsetting income or cognitive skills
+improvement.
+
+Among girls, statistically significant results are only observed in urban
+settings and contemporaneously. The use of time on chores negatively impacts
+PPVT test results. This could be related to gender archetypes, as girls around
+15 years of age are charged with a greater burden of time and effort for such
+activities, limiting their cognitive development.
+
+In summary, the results disaggregated by sex and area of residence show that
+the impact of time use is differentiated by these same variables. Girls are
+particularly affected by household-related activities; while boys are affected
+by work-related activities in the labor market or family environment, although
+in rural areas household activities also affect them to some extent.
+Consequently, the hypothesis of differentiated effects by sex and area of
+residence is supported by the estimates shown.
+
+%=============================================================================
+\section{Conclusions and Policy Proposals}
+\label{sec:conclusions}
+%=============================================================================
+
+This research analyzed how the allocation of time among children around 15
+years of age affects their cognitive development. Based on previously
+established evidence, it is suggested that the use of time in activities other
+than educational activities affects educational outcomes and cognitive
+development. Time- and effort-intensive activities such as work and housework
+are particularly likely to have such an effect.
+
+Two hypotheses were proposed and tested. On the one hand, time use has
+long-term impacts on the development of cognitive skills. On the other hand,
+time use has differential impacts depending on the area of residence (rural or
+urban) and the individual's sex. Using the Young Lives longitudinal survey
+and a value-added model, it is confirmed that there is indeed a negative
+relationship between time use and cognitive development. Specifically, there
+is a negative and contemporaneous relationship between time use on chores and
+work (inside and outside the home) with respect to the cognitive development
+measure used. Furthermore, when the sample is subdivided by sex and area of
+residence, it is found that work activities affect boys, while chores
+primarily affect girls.
+
+These results show that cognitive development outcomes can be affected when
+other activities such as chores and work are performed. Specifically, there is
+a long-term relationship that holds true even when the sample is subdivided,
+indicating that exposing boys and girls around the age of 8 to both activities
+could have negative long-term consequences. In this sense, a possible
+cost-effective policy would be to implement informational programs on the
+benefits of education so that parents' preferences are focused on their
+children's educational and cognitive development. Furthermore, information
+could be included regarding the negative impacts generated when work or chores
+are performed intensively at a young age (around 8 years old). In short, these
+would be low-cost policies amenable to rigorous impact evaluation.
+
+%=============================================================================
+%  REFERENCES
+%=============================================================================
+\newpage
+
+\begin{thebibliography}{99}
+
+\bibitem[Attanasio and Kaufmann(2009)]{attanasio2009}
+Attanasio, O., and K.~Kaufmann (2009).
+\newblock Educational choices, subjective expectations, and credit constraints.
+\newblock \textit{NBER Working Paper}.
+
+\bibitem[Barro(2002)]{barro2002}
+Barro, R. (2002).
+\newblock Education as a determinant of economic growth.
+\newblock \textit{Hoover Institution Press}.
+
+\bibitem[Becker(1964)]{becker1964}
+Becker, G. (1964).
+\newblock Human capital revisited.
+\newblock In G.~Becker, \textit{Human Capital}, pp.~15--21. Chicago:
+  University of Chicago Press.
+
+\bibitem[Becker(1993)]{becker1993}
+Becker, G. (1993).
+\newblock Investment in human capital: Rates of return.
+\newblock In G.~Becker, \textit{A Theoretical and Empirical Analysis with
+  Special Reference to Education}, pp.~59--92. Chicago: University of Chicago
+  Press.
+
+\bibitem[Becker(1994)]{becker1994}
+Becker, G. (1994).
+\newblock \textit{Human Capital: A Theoretical and Empirical Analysis}.
+\newblock Chicago: University of Chicago Press.
+
+\bibitem[Beltr\'{a}n(2013)]{beltran2013}
+Beltr\'{a}n, A. (2013).
+\newblock Family time is a scarce resource.
+\newblock \textit{CIUP}, pp.~117--156.
+
+\bibitem[Ben-Porath(1967)]{benporath1967}
+Ben-Porath, Y. (1967).
+\newblock The production of human capital and the life cycle of earnings.
+\newblock \textit{Journal of Political Economy}, 352--362.
+
+\bibitem[Busemeyer et~al.(2018)]{busemeyer2018}
+Busemeyer, M., N.~Cloete, G.~Drori, L.~Lassnigg, and B.~Schober (2018).
+\newblock The contribution of education to social progress.
+\newblock \textit{Cambridge University Press}, pp.~753--778.
+
+\bibitem[Campana et~al.(2014)]{campana2014}
+Campana, Y., J.~Aguirre, D.~Velasco, and E.~Guerrero (2014).
+\newblock Investment in educational infrastructure: The experience of flagship
+  schools.
+\newblock \textit{CIES}, pp.~6--13.
+
+\bibitem[Fuller(1987)]{fuller1987}
+Fuller, B. (1987).
+\newblock What school factors raise achievement in the third world?
+\newblock \textit{Review of Educational Research}, 255--292.
+
+\bibitem[Garc\'{i}a(2007)]{garcia2007}
+Garc\'{i}a, L. (2007).
+\newblock Who does the chores? Estimation of a household production function
+  in Peru.
+\newblock \textit{MPRA}.
+
+\bibitem[Glewwe(2002)]{glewwe2002}
+Glewwe, P. (2002).
+\newblock Schools and skills in developing countries: Education policies and
+  socioeconomic outcomes.
+\newblock \textit{Journal of Economic Literature}, 436--482.
+
+\bibitem[Glewwe and Kremer(2006)]{glewwe2006}
+Glewwe, P., and M.~Kremer (2006).
+\newblock Schools, teachers and education outcomes in developing countries.
+\newblock In E.~Hanushek and F.~Welch (Eds.), \textit{Handbook of the
+  Economics of Education}, pp.~964--971.
+
+\bibitem[Glewwe et~al.(2020)]{glewwe2020}
+Glewwe, P., S.~Lambert, and C.~Chen (2020).
+
+\bibitem[Gronau(1977)]{gronau1977}
+Gronau, R. (1977).
+\newblock Leisure, home production, and work---the theory of the allocation of
+  time revisited.
+\newblock \textit{Journal of Political Economy}, 85(6), 1099--1123.
+\newblock Causal inference in education research.
+\newblock \textit{Working Paper}.
+
+\bibitem[Grantham-McGregor et~al.(2007)]{grantham2007}
+Grantham-McGregor, S., Y.~Cheung, S.~Cueto, P.~Glewwe, L.~Richter, and
+  B.~Strupp (2007).
+\newblock Developmental potential in the first 5 years for children in
+  developing countries.
+\newblock \textit{Lancet}, 60--70.
+
+\bibitem[Jensen(2010)]{jensen2010}
+Jensen, R. (2010).
+\newblock The (perceived) returns to education and the demand for schooling.
+\newblock \textit{The Quarterly Journal of Economics}, 515--548.
+
+\bibitem[Jopen et~al.(2014)]{jopen2014}
+Jopen, G., W.~G\'{o}mez, and H.~Olivera (2014).
+\newblock The Peruvian education system: Overview and pending agenda.
+\newblock Lima: Working Paper.
+
+\bibitem[Laszlo(2008)]{laszlo2008}
+Laszlo, S. (2008).
+\newblock Education, labor supply and market development in rural Peru.
+\newblock \textit{World Development}, 2421--2439.
+
+\bibitem[Levison and Moe(1998)]{levison1998}
+Levison, D., and K.~Moe (1998).
+\newblock Household work as a deterrent to schooling: An analysis of adolescent
+  girls in Peru.
+\newblock \textit{The Journal of Developing Areas}, 339--356.
+
+\bibitem[MINEDU(2019)]{minedu2019}
+MINEDU (2019).
+\newblock PISA 2018 Assessment.
+\newblock Lima.
+
+\bibitem[Miranda(2008)]{miranda2008}
+Miranda, L. (2008).
+\newblock Factors associated with academic performance and their implications
+  for educational policy in Peru.
+\newblock \textit{GRADE}, pp.~11--39.
+
+\bibitem[Njie et~al.(2015)]{njie2015}
+Njie, H., C.~Manion, and M.~Badjie (2015).
+\newblock Girls' family responsibilities and schooling in The Gambia.
+\newblock \textit{International Educational Studies}.
+
+\bibitem[Ponce(2012)]{ponce2012}
+Ponce, C. (2012).
+\newblock Heterogeneous effects of child labor on the acquisition of cognitive
+  skills.
+\newblock \textit{GRADE}.
+
+\bibitem[Rojas and Cussianovich(2013)]{rojas2013}
+Rojas, V., and A.~Cussianovich (2013).
+\newblock Growing up in Peru: A longitudinal look at children's time use in
+  rural and urban areas.
+\newblock \textit{GRADE}.
+
+\bibitem[Romer(1989)]{romer1989}
+Romer, P. (1989).
+\newblock Human capital and growth: Theory and evidence.
+\newblock \textit{NBER Working Papers}.
+
+\bibitem[S\'{a}nchez(2013)]{sanchez2013}
+S\'{a}nchez, A. (2013).
+\newblock The structural relationship between nutrition, cognitive and
+  non-cognitive skills: Evidence from four developing countries.
+\newblock \textit{GRADE Institutional}.
+
+\bibitem[Webbink(2005)]{webbink2005}
+Webbink, D. (2005).
+\newblock Causal effects in education.
+\newblock \textit{Journal of Economic Surveys}, 535--560.
+
+\bibitem[Zapata and Contreras(2010)]{zapata2010}
+Zapata, D., and D.~Contreras (2010).
+\newblock Child labor and schooling in Bolivia: Who's falling behind? The roles
+  of domestic work, gender and ethnicity.
+\newblock \textit{World Development}, 588--599.
+
+\end{thebibliography}
+
+%=============================================================================
+%  APPENDICES
+%=============================================================================
+\newpage
+\appendix
+
+%-----------------------------------------------------------------------------
+\section{Young Lives Dataset Structure}
+\label{app:data}
+%-----------------------------------------------------------------------------
+
+\begin{table}[ht]
+\centering
+\caption{Young Lives survey rounds: cohorts, ages, and instruments available}
+\label{tab:younglives}
+\begin{tabular}{cclcccccc}
+\toprule
+\textbf{Year} & \textbf{Round} & \textbf{Cohort} & \textbf{Age}
+  & \multicolumn{2}{c}{\textbf{Reports}}
+  & \multicolumn{3}{c}{\textbf{Cognitive tests}} \\
+\cmidrule(lr){5-6} \cmidrule(lr){7-9}
+ & & & & Child & Caregiver & PPVT & Verbal & Math \\
+\midrule
+2002 & 1 & Younger & 1  & --- & --- & --- & --- & --- \\
+2002 & 1 & Older   & 8  & --- & --- & --- & --- & --- \\
+2006 & 2 & Younger & 5  & --- & X   & X   & --- & --- \\
+2006 & 2 & Older   & 12 & X   & X   & X   & --- & --- \\
+2009 & 3 & Younger & 8  & --- & X   & X   & X   & X   \\
+2009 & 3 & Older   & 15 & X   & X   & X   & X   & X   \\
+2013 & 4 & Younger & 12 & X   & X   & X   & X   & X   \\
+2013 & 4 & Older   & 19 & X   & --- & --- & X   & X   \\
+2016 & 5 & Younger & 15 & X   & X   & X   & X   & X   \\
+2016 & 5 & Older   & 21 & X   & --- & --- & --- & --- \\
+\bottomrule
+\multicolumn{9}{l}{\footnotesize Source: Young Lives. Authors' elaboration.}
+\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Note:} Annex~2 of the original thesis contains a map of the survey
+sites in Peru (Young Lives, authors' elaboration). [Figure omitted---insert
+original figure here.]
+
+%-----------------------------------------------------------------------------
+\section{Full Derivation of the Household Optimization Model}
+\label{app:model}
+%-----------------------------------------------------------------------------
+
+To analyze the relationship between time use and the development of cognitive
+skills, I start from the model of time distribution and investment in human
+capital \citep{becker1964} and the extension for self-employed households
+\citep{gronau1977}. The household is composed of two individuals---caregiver
+and child---and has a unitary utility that depends on the consumption of both
+individuals in $T$ periods:
+
+\begin{equation}
+  \max \; U = u(C_1, C_2, \ldots, C_T)
+  \tag{A.1}
+  \label{appeq:utility}
+\end{equation}
+
+Consumption in each period is composed of the level of cognitive development
+of the child ($\NDC_{\child,t}$), domestic tasks ($C_t^{TD}$), and leisure
+($C_t^{O}$):
+
+\begin{equation}
+  C_t = f_c\!\left(\NDC_{\child,t},\; C_t^{TD},\; C_t^{O}\right)
+  \tag{A.2}
+  \label{appeq:comp}
+\end{equation}
+
+where the leisure and domestic task vectors are defined over both household
+members:
+
+\begin{equation}
+  C_t^{O} = \begin{pmatrix} c_{\child,t}^{O} \\ c_{\cg,t}^{O} \end{pmatrix},
+  \qquad
+  C_t^{TD} = \begin{pmatrix} c_{\child,t}^{TD} \\ c_{\cg,t}^{TD} \end{pmatrix}
+  \tag{A.3}
+  \label{appeq:vectors}
+\end{equation}
+
+Following the Beckerian approach, consumption is ``produced'' by household
+members through a function $f_j$ that combines the time dedicated to the
+activity by both individuals and a set of market goods:
+
+\begin{align}
+  C_t^{O}  &= f_{O}\!\left(X_t^{O},\, T_t^{O}\right)
+  \tag{A.4}
+  \label{appeq:leisure} \\
+  C_t^{TD} &= f_{TD}\!\left(X_t^{TD},\, T_t^{TD}\right)
+  \tag{A.5}
+  \label{appeq:domestic}
+\end{align}
+
+where the time vectors are:
+
+\begin{equation}
+  T_t^{O} = \begin{pmatrix} T_{\child,t}^{O} \\ T_{\cg,t}^{O} \end{pmatrix},
+  \qquad
+  T_t^{TD} = \begin{pmatrix} T_{\child,t}^{TD} \\ T_{\cg,t}^{TD} \end{pmatrix}
+  \tag{A.6}
+  \label{appeq:timevecs}
+\end{equation}
+
+Given the emphasis on cognitive development, the level of cognitive development
+follows an accumulation process similar to the human capital accumulation
+equation of \citet{benporath1967}. The level of cognitive development observed
+at period $t$ is equivalent to the level observed at $t-1$ plus the cognitive
+development generated at $t$ by the household ($\varphi_t$):
+
+\begin{equation}
+  \NDC_{\child,t} = \NDC_{\child,t-1} + \varphi_t
+  \tag{A.7}
+  \label{appeq:ndc}
+\end{equation}
+
+\begin{equation}
+  \varphi_t = F(A_0,\, E_t,\, Q,\, N,\, H,\, I)
+  \tag{A.8}
+  \label{appeq:phi}
+\end{equation}
+
+\begin{equation}
+  E_t = f_E\!\left(A_0,\; T_t^{E},\; X_t^{E},\; Q,\; N,\; H,\; P_t\right)
+  \tag{A.9}
+  \label{appeq:education}
+\end{equation}
+
+Note that the cognitive development generated in $t$ ($\varphi_t$) depends on
+the child's innate ability $A_0$, school performance $E_t$, school quality $Q$,
+child characteristics $N$, household characteristics $H$, and the
+informational environment $I$. Furthermore, school performance also depends on
+time spent in school $T_t^{E}$, a set of goods dedicated to educational
+performance $X_t^{E}$, and the price level $P_t$.
+
+On the other hand, market goods used in different activities are obtained from
+autonomous income $Y_0$ and the income generated by both individuals through
+market work and family work:
+
+\begin{align}
+  P_t X_t &= Y_0 + Y_t^{TM} + Y_t^{TF}
+  \tag{A.10}
+  \label{appeq:budget} \\
+  Y_t^{TM} &= f_{TM}\!\left(\hat{W}_t,\, T_t^{TM}\right)
+  \tag{A.11}
+  \label{appeq:income_tm} \\
+  Y_t^{TF} &= f_{TF}\!\left(X_t^{TF},\, T_t^{TF},\, P_t\right)
+  \tag{A.12}
+  \label{appeq:income_tf}
+\end{align}
+
+Finally, a time constraint is incorporated. Total time $T$ is a scarce
+resource distributed among all activities by both household members:
+
+\begin{equation}
+  T = T_t^{O} + T_t^{TD} + T_t^{E} + T_t^{TF} + T_t^{TM}
+  \tag{A.13}
+  \label{appeq:time}
+\end{equation}
+
+\begin{equation}
+  T_t^{j} = \begin{pmatrix} T_{\child,t}^{j} \\ T_{\cg,t}^{j} \end{pmatrix}
+  \tag{A.14}
+  \label{appeq:timej}
+\end{equation}
+
+Solving the household maximization problem, the optimal allocation of time to
+each activity depends on exogenous variables:
+
+\begin{equation}
+  T_t^{j(*)} = \theta\!\left(\hat{W}_t,\; P_t,\; Q,\; H,\; N,\;
+               Y_0,\; A_0\right)
+  \qquad \forall\, j \in \{O,\, TD,\, E,\, TF,\, TM\}
+  \tag{A.15}
+  \label{appeq:optimal}
+\end{equation}
+
+\noindent\textbf{Notation:}
+\begin{itemize}\setlength{\itemsep}{2pt}
+  \item $\NDC_{\child,t}$: cognitive development level (child, period $t$)
+  \item $O$: leisure; $TD$: domestic tasks; $E$: education;
+        $TM$: market work; $TF$: family work
+  \item $A_0$: innate ability (fixed)
+  \item $Q$: school quality; $N$: child characteristics; $H$: household
+        characteristics; $I$: informational environment
+  \item $\hat{W}_t$: market wage; $P_t$: price level; $Y_0$: autonomous income
+  \item $(*)$ superscript denotes optimal values
+\end{itemize}
+
+\end{document}
