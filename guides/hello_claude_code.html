@@ -26,9 +26,9 @@
       --shadow:      rgba(26,23,20,0.08);
 
       /* Guide-specific palette */
-      --page-bg:     #edf1f7;   /* cool blue-tinted background */
+      --page-bg:     #faf7f2;   /* warm off-white — matches site */
       --surface:     #ffffff;   /* card surfaces */
-      --page-border: #c8d3e0;   /* cool-tinted border */
+      --page-border: #ddd8ce;   /* warm border */
 
       --navy:        #1e3a5f;   /* deep navy — primary educational accent */
       --navy-mid:    #2d5180;
@@ -70,7 +70,7 @@
       top: 0;
       z-index: 100;
       height: var(--nav-h);
-      background: rgba(237,241,247,0.95);
+      background: rgba(250,247,242,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--page-border);
       display: flex;
@@ -470,7 +470,7 @@
       line-height: 1.6;
     }
 
-    .guide-table tr:nth-child(even) td { background: rgba(229,236,247,0.35); }
+    .guide-table tr:nth-child(even) td { background: rgba(245,240,232,0.45); }
 
     /* ─── Code blocks ─────────────────────────────────────── */
     .code-block {
@@ -1575,21 +1575,38 @@ Commit after each completed step with a descriptive message.</code></pre>
 </footer>
 
 <script>
-  /* ─── TOC + Glossary: highlight active section ──────────── */
-  const tocLinks  = document.querySelectorAll('.toc-item');
+  const NAV_H   = 64;
+  const OFFSET  = 20;
+  const tocLinks     = document.querySelectorAll('.toc-item');
   const glossEntries = document.querySelectorAll('.gloss-entry');
 
+  /* ─── TOC click: explicit scroll, bypasses anchor ambiguity ─ */
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').replace('#', '');
+      const target = document.getElementById(id);
+      if (target) {
+        window.scrollTo({
+          top: target.getBoundingClientRect().top + window.scrollY - NAV_H - OFFSET,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  /* ─── Scroll tracking: highlight TOC + glossary ─────────── */
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const id = entry.target.id;
 
-      /* TOC */
+      /* TOC active */
       tocLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
       const activeToc = document.querySelector(`.toc-item[data-section="${id}"]`);
       if (activeToc) activeToc.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
-      /* Glossary */
+      /* Glossary active */
       const terms = (entry.target.dataset.terms || '').split(' ').filter(Boolean);
       glossEntries.forEach(el => el.classList.remove('active'));
       terms.forEach(key => {
