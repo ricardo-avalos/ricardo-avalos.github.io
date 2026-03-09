@@ -10,34 +10,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 
   <style>
-    /* ─── Base tokens (matches site) ─────────────────────── */
+    /* ─── Tokens ──────────────────────────────────────────── */
     :root {
-      --cream:      #f5f0e8;
-      --paper:      #faf7f2;
-      --ink:        #1a1714;
-      --ink-mid:    #4a4540;
-      --ink-light:  #8a8078;
-      --rust:       #b85c38;
-      --rust-light: #d4795a;
-      --sage:       #5a6b5d;
-      --gold:       #c8a96e;
-      --border:     #ddd8ce;
-      --shadow:     rgba(26,23,20,0.08);
+      /* Site base (unchanged) */
+      --cream:       #f5f0e8;
+      --paper:       #faf7f2;
+      --ink:         #1a1714;
+      --ink-mid:     #4a4540;
+      --ink-light:   #8a8078;
+      --rust:        #b85c38;
+      --rust-light:  #d4795a;
+      --sage:        #5a6b5d;
+      --gold:        #c8a96e;
+      --border:      #ddd8ce;
+      --shadow:      rgba(26,23,20,0.08);
 
-      /* ─── Educational semantic tokens ────────────────────── */
-      --blue:       #2a4a6b;
-      --blue-bg:    #eaf0f8;
-      --blue-border:#b8cfe0;
-      --amber:      #8b6914;
-      --amber-bg:   #fdf8ed;
-      --amber-border:#ddc97a;
-      --sage-bg:    #edf2ee;
-      --sage-border:#b8ccba;
+      /* Guide-specific palette */
+      --page-bg:     #edf1f7;   /* cool blue-tinted background */
+      --surface:     #ffffff;   /* card surfaces */
+      --page-border: #c8d3e0;   /* cool-tinted border */
+
+      --navy:        #1e3a5f;   /* deep navy — primary educational accent */
+      --navy-mid:    #2d5180;
+      --navy-light:  #e5ecf7;
+      --navy-muted:  #7a9fc8;
+
+      --note-bg:     #fff8ed;   /* amber note boxes */
+      --note-border: #d48820;
+      --note-text:   #5c340c;
+
+      --code-bg:     #1a1f2e;   /* dark blue-gray code */
+      --code-text:   #d5e3f0;
 
       --ff-display: 'Playfair Display', Georgia, serif;
       --ff-body:    'Source Serif 4', Georgia, serif;
       --ff-mono:    'DM Mono', monospace;
-
       --max-w: 1100px;
       --nav-h: 64px;
     }
@@ -46,7 +53,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--paper);
+      background: var(--page-bg);
       color: var(--ink);
       font-family: var(--ff-body);
       font-size: 17px;
@@ -57,25 +64,15 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
     /* ─── Nav ─────────────────────────────────────────────── */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
       height: var(--nav-h);
-      background: rgba(250,247,242,0.92);
+      background: rgba(237,241,247,0.95);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--page-border);
       display: flex;
       align-items: center;
     }
@@ -132,7 +129,7 @@
     .page-header {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 4rem 2rem 3rem;
+      padding: 3.5rem 2rem 2.5rem;
     }
 
     .page-header-back {
@@ -144,138 +141,166 @@
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
       transition: color 0.2s;
     }
 
     .page-header-back:hover { color: var(--rust); }
-
-    .page-header-meta {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .page-header-label {
-      font-family: var(--ff-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--rust);
-    }
-
-    .page-header-readtime {
-      font-family: var(--ff-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--ink-light);
-    }
 
     .page-header-title {
       font-family: var(--ff-display);
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 400;
       line-height: 1.15;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       color: var(--ink);
     }
 
     .page-header-desc {
       font-size: 1rem;
       color: var(--ink-mid);
-      max-width: 620px;
+      max-width: 600px;
       line-height: 1.8;
     }
 
-    .section-sep {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .section-sep hr { border: none; border-top: 1px solid var(--border); }
-
-    /* ─── Two-column guide layout ─────────────────────────── */
+    /* ─── Guide Layout ────────────────────────────────────── */
     .guide-layout {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 3rem 2rem 5rem;
+      padding: 2rem 2rem 5rem;
       display: grid;
-      grid-template-columns: 1fr 288px;
-      gap: 4rem;
+      grid-template-columns: 1fr 272px;
+      gap: 2rem;
       align-items: start;
     }
 
-    /* ─── What you'll learn box ───────────────────────────── */
-    .learn-box {
-      border: 1px solid var(--blue-border);
-      border-left: 4px solid var(--blue);
-      background: var(--blue-bg);
-      border-radius: 0 3px 3px 0;
-      padding: 1.4rem 1.6rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .learn-box-label {
-      font-family: var(--ff-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 0.8rem;
-    }
-
-    .learn-box ul {
-      padding-left: 1.2rem;
-    }
-
-    .learn-box li {
-      font-size: 0.95rem;
-      color: var(--ink-mid);
-      line-height: 1.7;
-      margin-bottom: 0.2rem;
-    }
-
-    /* ─── Guide Sections ──────────────────────────────────── */
     .guide-main { min-width: 0; }
 
-    .guide-section {
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--border);
+    /* ─── Intro Banner ────────────────────────────────────── */
+    .guide-intro {
+      background: var(--navy);
+      border-radius: 4px;
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
     }
 
-    .guide-section:last-child { border-bottom: none; }
-
-    .section-heading {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .section-num {
+    .intro-label {
       font-family: var(--ff-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      color: var(--rust);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .intro-value {
+      font-size: 0.92rem;
+      color: var(--code-text);
+      line-height: 1.6;
+    }
+
+    /* ─── Section cards ───────────────────────────────────── */
+    .guide-section {
+      background: var(--surface);
+      border: 1px solid var(--page-border);
+      border-radius: 4px;
+      padding: 2rem 2.2rem 2.5rem;
+      margin-bottom: 1.5rem;
+      scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+    }
+
+    .guide-section:last-child { margin-bottom: 0; }
+
+    /* ─── Part headers ────────────────────────────────────── */
+    .part-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 1.4rem;
+      margin-bottom: 1.8rem;
+      border-bottom: 2px solid var(--navy-light);
+    }
+
+    .part-badge {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--surface);
+      background: var(--navy);
+      padding: 0.28em 0.75em;
+      border-radius: 2px;
+      white-space: nowrap;
       flex-shrink: 0;
-      padding-top: 0.15em;
     }
 
-    .guide-section h2 {
+    .optional-badge {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy-mid);
+      background: var(--navy-light);
+      border: 1px solid var(--page-border);
+      padding: 0.2em 0.65em;
+      border-radius: 2px;
+    }
+
+    .part-title {
       font-family: var(--ff-display);
-      font-size: 1.32rem;
+      font-size: 1.4rem;
       font-weight: 400;
-      line-height: 1.3;
-      color: var(--ink);
+      color: var(--navy);
+      line-height: 1.2;
     }
 
+    /* ─── Steps ───────────────────────────────────────────── */
+    .step {
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--page-border);
+    }
+
+    .step:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .step:first-of-type { padding-top: 0; }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-family: var(--ff-display);
+      font-size: 1.08rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    /* ─── Body text ───────────────────────────────────────── */
     .guide-section p {
-      font-size: 0.97rem;
+      font-size: 0.96rem;
       color: var(--ink-mid);
       line-height: 1.8;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
 
     .guide-section p:last-child { margin-bottom: 0; }
@@ -283,11 +308,11 @@
     .guide-section ul,
     .guide-section ol {
       padding-left: 1.4rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
 
     .guide-section li {
-      font-size: 0.97rem;
+      font-size: 0.96rem;
       color: var(--ink-mid);
       line-height: 1.8;
       margin-bottom: 0.2rem;
@@ -295,72 +320,128 @@
 
     .guide-section strong { color: var(--ink); font-weight: 400; }
 
-    .term {
-      color: var(--rust);
-      border-bottom: 1px dotted var(--rust);
-      cursor: default;
+    /* ─── Accounts grid (Before you start) ───────────────── */
+    .accounts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.2rem 0 1.4rem;
     }
 
-    .block-heading {
+    .account-card {
+      border: 1px solid var(--page-border);
+      border-radius: 3px;
+      padding: 1rem 1.1rem;
+      background: var(--page-bg);
+    }
+
+    .account-card-required { border-top: 3px solid var(--navy); }
+    .account-card-optional { border-top: 3px solid var(--page-border); }
+
+    .account-name {
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.1rem;
+    }
+
+    .account-url {
       font-family: var(--ff-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--navy-mid);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    .account-desc {
+      font-size: 0.84rem;
       color: var(--ink-light);
-      margin: 1.4rem 0 0.5rem;
+      line-height: 1.55;
     }
 
-    /* ─── Callout boxes ───────────────────────────────────── */
-    .callout {
-      border-left: 4px solid;
+    /* ─── Note boxes ──────────────────────────────────────── */
+    .note-box {
+      border-left: 4px solid var(--note-border);
+      background: var(--note-bg);
       border-radius: 0 3px 3px 0;
-      padding: 1rem 1.2rem;
-      margin: 1.4rem 0;
+      padding: 0.9rem 1.1rem;
+      margin: 1.2rem 0;
     }
 
-    .callout p { margin-bottom: 0.4rem; font-size: 0.92rem; }
-    .callout p:last-child { margin-bottom: 0; }
-    .callout ul { padding-left: 1.2rem; margin-bottom: 0; }
-    .callout li { font-size: 0.92rem; margin-bottom: 0.1rem; }
-
-    .callout-label {
+    .note-label {
       font-family: var(--ff-mono);
       font-size: 0.68rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      display: block;
+      color: var(--note-border);
+      margin-bottom: 0.4rem;
     }
 
-    /* Concept — blue */
-    .callout-concept {
-      border-color: var(--blue);
-      background: var(--blue-bg);
+    .note-box p {
+      font-size: 0.9rem;
+      color: var(--note-text);
+      line-height: 1.7;
+      margin-bottom: 0.4rem;
     }
-    .callout-concept .callout-label { color: var(--blue); }
-    .callout-concept p, .callout-concept li { color: var(--ink-mid); }
 
-    /* Tip — amber */
-    .callout-tip {
-      border-color: var(--amber);
-      background: var(--amber-bg);
-    }
-    .callout-tip .callout-label { color: var(--amber); }
-    .callout-tip p, .callout-tip li { color: var(--ink-mid); }
+    .note-box p:last-child { margin-bottom: 0; }
+    .note-box code { font-family: var(--ff-mono); font-size: 0.85em; }
 
-    /* Note — sage */
-    .callout-note {
-      border-color: var(--sage);
-      background: var(--sage-bg);
+    /* ─── Tooltips (pure CSS) ─────────────────────────────── */
+    .tt {
+      position: relative;
+      color: var(--rust);
+      border-bottom: 1px dotted var(--rust);
+      cursor: help;
     }
-    .callout-note .callout-label { color: var(--sage); }
-    .callout-note p, .callout-note li { color: var(--ink-mid); }
+
+    .tt::before {
+      content: '';
+      position: absolute;
+      bottom: calc(100% + 3px);
+      left: 10px;
+      border: 5px solid transparent;
+      border-top-color: var(--navy);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+      z-index: 51;
+    }
+
+    .tt::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 13px);
+      left: 0;
+      width: 260px;
+      background: var(--navy);
+      color: var(--code-text);
+      padding: 0.6rem 0.8rem;
+      border-radius: 3px;
+      font-family: var(--ff-body);
+      font-size: 0.82rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 1.55;
+      letter-spacing: 0;
+      text-transform: none;
+      border-bottom: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+      z-index: 50;
+      white-space: normal;
+    }
+
+    .tt:hover::before,
+    .tt:hover::after { opacity: 1; }
+
+    /* shift tooltip left when near right edge */
+    .tt-r::after { left: auto; right: 0; }
+    .tt-r::before { left: auto; right: 10px; }
 
     /* ─── Tables ──────────────────────────────────────────── */
-    .guide-table-wrap {
-      overflow-x: auto;
-      margin: 1.4rem 0;
-    }
+    .table-wrap { overflow-x: auto; margin: 1.2rem 0; }
 
     .guide-table {
       width: 100%;
@@ -370,31 +451,31 @@
 
     .guide-table th {
       font-family: var(--ff-mono);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--ink-mid);
-      background: var(--cream);
+      color: var(--navy);
+      background: var(--navy-light);
       padding: 0.65rem 1rem;
-      border: 1px solid var(--border);
+      border: 1px solid var(--page-border);
       text-align: left;
       font-weight: 400;
     }
 
     .guide-table td {
       padding: 0.65rem 1rem;
-      border: 1px solid var(--border);
+      border: 1px solid var(--page-border);
       color: var(--ink-mid);
       vertical-align: top;
       line-height: 1.6;
     }
 
-    .guide-table tr:nth-child(even) td { background: rgba(245,240,232,0.35); }
+    .guide-table tr:nth-child(even) td { background: rgba(229,236,247,0.35); }
 
     /* ─── Code blocks ─────────────────────────────────────── */
     .code-block {
-      margin: 1.4rem 0;
-      border: 1px solid var(--border);
+      margin: 1.2rem 0;
+      border: 1px solid var(--page-border);
       border-radius: 3px;
       overflow: hidden;
     }
@@ -403,9 +484,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.45rem 1rem;
-      background: var(--cream);
-      border-bottom: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      background: #252b3b;
+      border-bottom: 1px solid #333d54;
     }
 
     .code-lang {
@@ -413,7 +494,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-light);
+      color: var(--navy-muted);
     }
 
     .code-download {
@@ -421,23 +502,20 @@
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--rust);
+      color: var(--navy-muted);
       background: none;
-      border: 1px solid var(--border);
+      border: 1px solid #333d54;
       border-radius: 2px;
       padding: 0.2em 0.7em;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      transition: color 0.2s, border-color 0.2s;
     }
 
-    .code-download:hover {
-      border-color: var(--rust);
-      background: rgba(184,92,56,0.06);
-    }
+    .code-download:hover { color: var(--code-text); border-color: var(--navy-muted); }
 
     .code-block pre {
-      background: #1a1714;
-      padding: 1.2rem 1.4rem;
+      background: var(--code-bg);
+      padding: 1.1rem 1.3rem;
       overflow-x: auto;
       margin: 0;
     }
@@ -445,90 +523,99 @@
     .code-block code {
       font-family: var(--ff-mono);
       font-size: 0.82rem;
-      color: #ddd8ce;
+      color: var(--code-text);
       line-height: 1.75;
       white-space: pre;
     }
 
-    /* ─── Workflow diagram (section 15) ───────────────────── */
-    .workflow-row {
-      display: flex;
-      align-items: stretch;
-      margin: 1.4rem 0;
-      border: 1px solid var(--border);
+    /* inline code */
+    .guide-section p code,
+    .guide-section li code,
+    .note-box code {
+      font-family: var(--ff-mono);
+      font-size: 0.85em;
+      background: var(--navy-light);
+      color: var(--navy);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    /* ─── Glossary section (bottom of page) ──────────────── */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border: 1px solid var(--page-border);
       border-radius: 3px;
       overflow: hidden;
+      margin-top: 1.2rem;
     }
 
-    .workflow-step {
-      flex: 1;
-      padding: 1rem 1.2rem;
-      background: white;
-      border-right: 1px solid var(--border);
+    .glossary-item {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--page-border);
+      border-right: 1px solid var(--page-border);
     }
 
-    .workflow-step:last-child { border-right: none; }
+    .glossary-item:nth-child(even) { border-right: none; }
+    .glossary-item:nth-last-child(-n+2) { border-bottom: none; }
 
-    .workflow-step-label {
+    .gloss-term-main {
       font-family: var(--ff-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 0.3rem;
+      font-size: 0.78rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.02em;
     }
 
-    .workflow-step-text {
-      font-size: 0.88rem;
+    .gloss-def-main {
+      font-size: 0.86rem;
       color: var(--ink-mid);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     /* ─── Sidebar ─────────────────────────────────────────── */
     .guide-sidebar {
       position: sticky;
-      top: calc(var(--nav-h) + 2rem);
-      max-height: calc(100vh - var(--nav-h) - 4rem);
+      top: calc(var(--nav-h) + 1.5rem);
+      max-height: calc(100vh - var(--nav-h) - 3rem);
       overflow-y: auto;
       scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
+      scrollbar-color: var(--page-border) transparent;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1rem;
     }
 
     .sidebar-block {
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      background: white;
+      background: var(--surface);
+      border: 1px solid var(--page-border);
+      border-radius: 4px;
       overflow: hidden;
     }
 
     .sidebar-title {
       font-family: var(--ff-mono);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--ink-light);
-      padding: 0.9rem 1.2rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--cream);
+      color: var(--navy-muted);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--page-border);
+      background: var(--navy-light);
     }
 
-    /* ─── Table of Contents ───────────────────────────────── */
-    .toc-list {
-      list-style: none;
-      padding: 0.4rem 0;
-    }
+    /* TOC */
+    .toc-list { list-style: none; padding: 0.3rem 0; }
 
     .toc-item {
       display: flex;
       align-items: baseline;
-      gap: 0.6rem;
-      padding: 0.45rem 1.2rem;
+      gap: 0.55rem;
+      padding: 0.38rem 1rem;
       font-size: 0.82rem;
       color: var(--ink-light);
-      transition: color 0.2s, background 0.2s;
+      transition: color 0.18s, background 0.18s;
       border-left: 3px solid transparent;
       cursor: pointer;
     }
@@ -536,56 +623,55 @@
     .toc-item:hover { color: var(--ink-mid); }
 
     .toc-item.active {
-      color: var(--ink);
-      background: rgba(245,240,232,0.5);
-      border-left-color: var(--rust);
+      color: var(--navy);
+      background: var(--navy-light);
+      border-left-color: var(--navy);
     }
 
     .toc-num {
       font-family: var(--ff-mono);
-      font-size: 0.68rem;
-      color: var(--rust);
+      font-size: 0.65rem;
+      color: var(--navy-muted);
       flex-shrink: 0;
-      opacity: 0.7;
     }
 
-    .toc-item.active .toc-num { opacity: 1; }
-
+    .toc-item.active .toc-num { color: var(--navy); }
     .toc-text { line-height: 1.4; }
 
-    /* ─── Glossary ────────────────────────────────────────── */
+    /* Glossary sidebar */
     .gloss-entry {
-      padding: 0.9rem 1.2rem;
-      border-bottom: 1px solid var(--border);
-      transition: background 0.25s, border-left-color 0.25s;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--page-border);
       border-left: 3px solid transparent;
+      transition: background 0.2s, border-left-color 0.2s;
     }
 
     .gloss-entry:last-child { border-bottom: none; }
 
     .gloss-entry.active {
-      background: rgba(184,92,56,0.05);
-      border-left-color: var(--rust);
+      background: var(--navy-light);
+      border-left-color: var(--navy);
     }
 
     .gloss-term {
       font-family: var(--ff-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
-      color: var(--ink);
-      margin-bottom: 0.3rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
     }
 
     .gloss-def {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--ink-light);
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
     /* ─── Footer ──────────────────────────────────────────── */
     footer {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--page-border);
       padding: 3rem 2rem;
+      background: var(--surface);
     }
 
     .footer-inner {
@@ -616,7 +702,7 @@
       max-width: var(--max-w);
       margin: 2rem auto 0;
       padding: 1.5rem 2rem 0;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--page-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -628,17 +714,20 @@
 
     /* ─── Responsive ──────────────────────────────────────── */
     @media (max-width: 860px) {
-      .guide-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .guide-layout { grid-template-columns: 1fr; gap: 1.5rem; }
       .guide-sidebar { position: static; max-height: none; }
+      .guide-intro { grid-template-columns: 1fr; gap: 1.2rem; }
+      .accounts-grid { grid-template-columns: 1fr; }
+      .glossary-grid { grid-template-columns: 1fr; }
+      .glossary-item { border-right: none; }
+      .glossary-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--page-border); }
+      .glossary-item:last-child { border-bottom: none; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 560px) {
       .footer-inner { grid-template-columns: 1fr; }
       .nav-links { gap: 1.5rem; }
-      .workflow-row { flex-direction: column; }
-      .workflow-step { border-right: none; border-bottom: 1px solid var(--border); }
-      .workflow-step:last-child { border-bottom: none; }
     }
   </style>
 </head>
@@ -660,689 +749,797 @@
 <!-- ─── Page Header ───────────────────────────────────────── -->
 <div class="page-header">
   <a href="../applied_projects.html" class="page-header-back">← Applied Projects</a>
-  <div class="page-header-meta">
-    <span class="page-header-label">Guide · AI and LLMs</span>
-    <span class="page-header-readtime">~20 min read · 15 sections</span>
-  </div>
   <h1 class="page-header-title">Hello Claude Code</h1>
-  <p class="page-header-desc">A step-by-step guide to setting up a reproducible research workflow using Claude Code, GitHub Codespaces, and Supabase. Build a professional, protected, and fully automated project environment from scratch — no prior developer experience required.</p>
+  <p class="page-header-desc">A step-by-step guide to setting up your research workflow using Claude Code and GitHub Codespaces. No prior developer experience required.</p>
 </div>
-
-<div class="section-sep"><hr/></div>
 
 <!-- ─── Guide Layout ──────────────────────────────────────── -->
 <div class="guide-layout">
+<div class="guide-main">
 
-  <!-- ─── Main Content ────────────────────────────────────── -->
-  <div class="guide-main">
+  <!-- Intro banner -->
+  <div class="guide-intro">
+    <div>
+      <p class="intro-label">Who this is for</p>
+      <p class="intro-value">Researchers and students who want to use Claude Code to assist with projects but have little or no prior experience with developer tools.</p>
+    </div>
+    <div>
+      <p class="intro-label">What you'll have</p>
+      <p class="intro-value">A fully working cloud development environment connected to Claude Code, with your code protected on GitHub and ready for serious research work.</p>
+    </div>
+    <div>
+      <p class="intro-label">Time to complete</p>
+      <p class="intro-value">About 1 hour for the full setup. Parts 4 and 5 are optional and can be done later.</p>
+    </div>
+  </div>
 
-    <!-- What you'll learn -->
-    <div class="learn-box">
-      <p class="learn-box-label">What you'll learn</p>
+  <!-- ─── Before you start ──────────────────────────────── -->
+  <div class="guide-section" id="before" data-terms="">
+    <div class="part-header">
+      <h2 class="part-title">Before you start</h2>
+    </div>
+
+    <p>You will need accounts on the following services:</p>
+
+    <div class="accounts-grid">
+      <div class="account-card account-card-required">
+        <p class="account-name">GitHub</p>
+        <p class="account-url">github.com</p>
+        <p class="account-desc">Where your code and project files will live</p>
+      </div>
+      <div class="account-card account-card-required">
+        <p class="account-name">Anthropic</p>
+        <p class="account-url">claude.ai</p>
+        <p class="account-desc">To access Claude Code — requires at minimum a Pro plan at $20/month</p>
+      </div>
+      <div class="account-card account-card-optional">
+        <p class="account-name">Supabase</p>
+        <p class="account-url">supabase.com</p>
+        <p class="account-desc">Optional — only needed for Part 5 (data storage)</p>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <p class="note-label">Note</p>
+      <p>This guide focuses on running Claude Code inside GitHub Codespaces — a cloud environment. Nothing gets installed on your personal computer. Everything runs in your browser. This is the recommended approach for beginners because it is safer, more consistent, and works on any device.</p>
+    </div>
+  </div>
+
+  <!-- ─── Part 1 ─────────────────────────────────────────── -->
+  <div class="guide-section" id="part1" data-terms="repository main-branch pull-request gitignore claudemd">
+    <div class="part-header">
+      <span class="part-badge">Part 1</span>
+      <h2 class="part-title">Create your GitHub repository</h2>
+    </div>
+
+    <p>A <span class="tt" data-tip="A folder on GitHub that stores all the files for one project, along with the full history of every change ever made to those files">repository</span> is where your project lives. Think of it as a permanent, version-tracked filing cabinet for everything related to your work.</p>
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">1</span>
+        <h3 class="step-title">Create a new repository</h3>
+      </div>
+      <p>Go to github.com and sign in. Click the <strong>+</strong> icon in the top right corner and select <strong>"New repository"</strong>.</p>
+      <p>Fill in the form:</p>
       <ul>
-        <li>How Claude Code differs from the Claude.ai chat, and when to use each</li>
-        <li>How to set up a protected GitHub repository and a cloud coding environment</li>
-        <li>How to version your data with DVC and store it in Supabase</li>
-        <li>How to structure a pipeline that anyone can reproduce with a single command</li>
-        <li>How to use Skills to give Claude standing instructions for repeated tasks</li>
+        <li><strong>Repository name</strong> — use a short descriptive name with no spaces, e.g. <code>my-research-project</code></li>
+        <li><strong>Visibility</strong> — set to <strong>Private</strong> if your work is not ready to be public</li>
+        <li><strong>Add a README file</strong> — check this box</li>
       </ul>
+      <p>Click <strong>"Create repository"</strong>.</p>
     </div>
 
-    <!-- ─── Section 1 ────────────────────────────────────── -->
-    <div class="guide-section" id="s1" data-terms="command-line-tool">
-      <div class="section-heading">
-        <span class="section-num">01</span>
-        <h2>What is Claude Code and how is it different from this chat?</h2>
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">2</span>
+        <h3 class="step-title">Protect your main branch</h3>
       </div>
-
-      <div class="callout callout-concept">
-        <span class="callout-label">Key concept</span>
-        <p>Claude Code is a <span class="term" data-term="command-line-tool">command-line tool</span> that reads, writes, and runs code directly inside your project files. Unlike Claude.ai, it doesn't just give you answers — it executes real changes to real files.</p>
-      </div>
-
-      <p>Think of the two tools as having different roles:</p>
+      <p>Your <span class="tt" data-tip="The primary, official version of your project. Think of it as the published version — stable and trusted. All finished, reviewed work lives here">main branch</span> should be locked so nothing reaches it accidentally.</p>
+      <p>Go to your repository → <strong>Settings</strong> → <strong>Branches</strong> → <strong>Add branch protection rule</strong>. Fill in:</p>
       <ul>
-        <li><strong>Claude.ai (chat)</strong> — for planning, learning, and making decisions. Use it to think through a problem, understand a concept, or decide between approaches. It has memory of your full conversation and is good for open-ended discussion.</li>
-        <li><strong>Claude Code (terminal)</strong> — for executing. It works best with clear, specific, actionable instructions. It reads your project files, writes code, runs commands, and commits changes. It has no memory between sessions — every time you launch it, it starts fresh (except for what is in your CLAUDE.md file).</li>
+        <li><strong>Branch name pattern</strong> — type <code>main</code></li>
+        <li>Enable <strong>"Require a pull request before merging"</strong></li>
       </ul>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Tip</span>
-        <p>The best workflow combines both: use Claude.ai to develop judgment and make decisions, then use Claude Code to execute with that judgment already baked into your instructions.</p>
+      <p>Click <strong>"Create"</strong>.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>This means nobody — including Claude Code — can push changes directly to main. The only way to update main is through a <span class="tt tt-r" data-tip="A formal proposal on GitHub to merge changes from one branch into another. It shows exactly what changed and requires you to review and approve it before anything is merged">Pull Request</span> that you personally review and approve. This is your most important safety net.</p>
       </div>
     </div>
 
-    <!-- ─── Section 2 ────────────────────────────────────── -->
-    <div class="guide-section" id="s2" data-terms="virtual-computer">
-      <div class="section-heading">
-        <span class="section-num">02</span>
-        <h2>Should I run Claude Code on my computer or in the cloud?</h2>
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">3</span>
+        <h3 class="step-title">Create a .gitignore file</h3>
       </div>
-
-      <p>You have two options:</p>
-      <p class="block-heading">Option A — Claude Code on your local machine</p>
-      <p>You install Claude Code on your own computer. It runs in your normal terminal and Claude can see and edit files that physically live on your hard drive.</p>
-
-      <p class="block-heading">Option B — Claude Code inside GitHub Codespaces</p>
-      <p>GitHub Codespaces gives you a <span class="term" data-term="virtual-computer">virtual computer</span> in the cloud, accessible from your browser. You install Claude Code inside that virtual machine, so Claude operates on files stored in the cloud, not on your physical computer.</p>
-
-      <div class="guide-table-wrap">
-        <table class="guide-table">
-          <thead><tr><th></th><th>Local</th><th>Codespaces</th></tr></thead>
-          <tbody>
-            <tr><td>Setup</td><td>You manage everything</td><td>GitHub manages the environment</td></tr>
-            <tr><td>Cost</td><td>Free (pay only for Claude)</td><td>Free tier: 120 core-hours/month</td></tr>
-            <tr><td>Access</td><td>Your machine only</td><td>Any browser, anywhere</td></tr>
-            <tr><td>Risk to your computer</td><td>Higher</td><td>None — fully isolated</td></tr>
-            <tr><td>Good for</td><td>Solo, daily work</td><td>Occasional work, any device</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Recommendation</span>
-        <p>Codespaces is the safer starting point for researchers. Nothing touches your computer, and the free tier is generous enough for project work that does not happen every day.</p>
-      </div>
-    </div>
-
-    <!-- ─── Section 3 ────────────────────────────────────── -->
-    <div class="guide-section" id="s3" data-terms="machine-types">
-      <div class="section-heading">
-        <span class="section-num">03</span>
-        <h2>How much computing power does Codespaces give me?</h2>
-      </div>
-
-      <p>GitHub Codespaces offers different <span class="term" data-term="machine-types">machine types</span> you select when creating a workspace:</p>
-
-      <div class="guide-table-wrap">
-        <table class="guide-table">
-          <thead><tr><th>Machine</th><th>CPUs</th><th>RAM</th><th>Storage</th></tr></thead>
-          <tbody>
-            <tr><td>2-core</td><td>2</td><td>8 GB</td><td>32 GB</td></tr>
-            <tr><td>4-core</td><td>4</td><td>16 GB</td><td>32 GB</td></tr>
-            <tr><td>8-core</td><td>8</td><td>32 GB</td><td>64 GB</td></tr>
-            <tr><td>16-core</td><td>16</td><td>64 GB</td><td>128 GB</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Tip</span>
-        <p>For most research work — data cleaning, modeling, writing — the 2-core or 4-core machine is plenty. The free tier gives you 120 core-hours per month, meaning a 2-core machine gives you 60 hours of free usage per month.</p>
-      </div>
-    </div>
-
-    <!-- ─── Section 4 ────────────────────────────────────── -->
-    <div class="guide-section" id="s4" data-terms="ubuntu-linux">
-      <div class="section-heading">
-        <span class="section-num">04</span>
-        <h2>Can I use R, Stata, or Python in Codespaces?</h2>
-      </div>
-
-      <p>Codespaces runs on <span class="term" data-term="ubuntu-linux">Ubuntu Linux</span>, which supports virtually any research tool:</p>
-      <ul>
-        <li><strong>R</strong> — fully supported, installable in minutes</li>
-        <li><strong>Python</strong> — pre-installed</li>
-        <li><strong>Julia</strong> — installable</li>
-        <li><strong>LaTeX / Quarto / R Markdown</strong> — all work for document generation</li>
-      </ul>
-
-      <div class="callout callout-note">
-        <span class="callout-label">Note — Stata</span>
-        <p>Stata is commercial software with a license tied to a physical machine. Running it in a cloud virtual machine likely violates its license terms. Check with your institution before attempting this.</p>
-      </div>
-    </div>
-
-    <!-- ─── Section 5 ────────────────────────────────────── -->
-    <div class="guide-section" id="s5" data-terms="">
-      <div class="section-heading">
-        <span class="section-num">05</span>
-        <h2>What plans do I need to use Claude Code?</h2>
-      </div>
-
-      <div class="callout callout-concept">
-        <span class="callout-label">Key concept</span>
-        <p>Claude Code requires at minimum a <strong>Pro subscription</strong> at $20/month. The free plan does not include Claude Code access.</p>
-      </div>
-
-      <div class="guide-table-wrap">
-        <table class="guide-table">
-          <thead><tr><th>Plan</th><th>Price</th><th>Claude Code</th><th>Best for</th></tr></thead>
-          <tbody>
-            <tr><td>Free</td><td>$0</td><td>Not available</td><td>Chat only</td></tr>
-            <tr><td>Pro</td><td>$20/month</td><td>Light to moderate</td><td>Solo research, occasional use</td></tr>
-            <tr><td>Max 5x</td><td>$100/month</td><td>Moderate to heavy</td><td>Professional daily use</td></tr>
-            <tr><td>Max 20x</td><td>$200/month</td><td>Heavy</td><td>Full-time developer use</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>Usage limits reset every five hours and are shared across Claude chat and Claude Code. For a researcher who does not work on projects every day, Pro is more than sufficient.</p>
-    </div>
-
-    <!-- ─── Section 6 ────────────────────────────────────── -->
-    <div class="guide-section" id="s6" data-terms="main-branch pull-request gitignore">
-      <div class="section-heading">
-        <span class="section-num">06</span>
-        <h2>How do I set up my GitHub repository correctly before starting?</h2>
-      </div>
-
-      <p>Before writing any code, protect your repository with two things:</p>
-
-      <p class="block-heading">1. Branch protection on main</p>
-
-      <div class="callout callout-concept">
-        <span class="callout-label">Key concept</span>
-        <p>Your <span class="term" data-term="main-branch">main branch</span> should be locked so that nothing reaches it without your explicit approval. Go to GitHub → Settings → Branches → Add branch protection rule, set branch name to <code>main</code>, and enable "Require a pull request before merging."</p>
-        <p>This means Claude Code can push freely to other branches, but main is sealed. The only way to get changes in is through a <span class="term" data-term="pull-request">Pull Request</span> you manually review and approve.</p>
-      </div>
-
-      <p class="block-heading">2. A .gitignore file</p>
-      <p>A <span class="term" data-term="gitignore">.gitignore</span> file prevents sensitive files from ever reaching GitHub.</p>
-
+      <p>A <span class="tt" data-tip="A file that tells Git which files to never track or upload to GitHub. Files listed here are completely invisible to Git — they stay only on your local machine or Codespace">.gitignore</span> file prevents sensitive files from accidentally reaching GitHub.</p>
+      <p>In your repository, click <strong>"Add file"</strong> → <strong>"Create new file"</strong>. Name it exactly <code>.gitignore</code> and paste this content:</p>
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">gitignore</span>
-          <button class="code-download" onclick="downloadCode(this, 'gitignore.txt')">Download</button>
+          <button class="code-download" onclick="downloadCode(this, '.gitignore')">Download</button>
         </div>
         <pre><code># Credentials - never push these
 .env
 
-# Raw data files
+# Common data files
 *.csv
 *.xlsx
 *.dta
 *.parquet
+*.rds
 
-# LaTeX compilation artifacts
+# LaTeX compilation files
 *.aux
 *.log
-*.synctex.gz</code></pre>
-      </div>
+*.synctex.gz
+*.fls
+*.fdb_latexmk
 
-      <div class="callout callout-note">
-        <span class="callout-label">Critical</span>
-        <p>The most important entry is <code>.env</code> — this is where your cloud storage credentials live. It must never be pushed to GitHub.</p>
+# Python artifacts
+__pycache__/
+*.pyc
+
+# R artifacts
+.Rhistory
+.RData
+
+# OS files
+.DS_Store
+Thumbs.db</code></pre>
+      </div>
+      <p>Scroll down and click <strong>"Commit changes"</strong> → <strong>"Commit directly to main"</strong>.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>The most critical entry is <code>.env</code> — this is where private credentials are stored. It must never be uploaded to GitHub. The .gitignore ensures this file is permanently invisible to Git.</p>
       </div>
     </div>
 
-    <!-- ─── Section 7 ────────────────────────────────────── -->
-    <div class="guide-section" id="s7" data-terms="global-claude-md">
-      <div class="section-heading">
-        <span class="section-num">07</span>
-        <h2>What is CLAUDE.md and why does it matter?</h2>
+    <!-- Step 4 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">4</span>
+        <h3 class="step-title">Create a CLAUDE.md file</h3>
       </div>
-
-      <div class="callout callout-concept">
-        <span class="callout-label">Key concept</span>
-        <p><code>CLAUDE.md</code> is a plain text file that Claude Code reads automatically at the start of every session. Think of it as a standing instruction manual — the rules of the house that Claude always follows without you having to repeat them.</p>
-      </div>
-
-      <p>A good CLAUDE.md for a research project includes:</p>
-      <ul>
-        <li>Git rules (never push to main, always work on dev branch)</li>
-        <li>Folder structure rules (where inputs and outputs live)</li>
-        <li>Coding style preferences (R vs Python, naming conventions)</li>
-        <li>What Claude is and is not allowed to do without asking</li>
-      </ul>
-
+      <p><code>CLAUDE.md</code> is a plain text file that Claude Code reads automatically every time you start a session. It is the instruction manual for your project — the rules Claude always follows without you having to repeat them.</p>
+      <p>Click <strong>"Add file"</strong> → <strong>"Create new file"</strong>. Name it <code>CLAUDE.md</code> and paste this content, adjusted to your project:</p>
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">markdown</span>
           <button class="code-download" onclick="downloadCode(this, 'CLAUDE.md')">Download</button>
         </div>
-        <pre><code>## Git rules — CRITICAL
+        <pre><code># Claude Code Instructions
+
+## Who I am
+This is a solo research project. I am the only person working on this repo.
+
+## Git rules — CRITICAL
 - NEVER push to main under any circumstances
+- NEVER create a pull request to main without me explicitly asking
 - Always work on the dev branch
-- NEVER commit .env files or credentials
+- NEVER commit .env files or any file containing credentials
+- Always commit after each meaningful change with a descriptive message
 
 ## Folder structure
-- Never modify files inside any input/ folder
-- Always write outputs to the output/ folder of the current stage</code></pre>
-      </div>
+- Never modify files inside any input/ folder — these are read-only inputs
+- Always write outputs to the output/ folder of the current stage
+- Never delete files without asking me first
 
-      <div class="callout callout-tip">
-        <span class="callout-label">Tip</span>
-        <p>You can also create a <span class="term" data-term="global-claude-md">global CLAUDE.md</span> at <code>~/.claude/CLAUDE.md</code> for preferences that apply across all your projects, like your coding style and general behaviour rules.</p>
+## Coding style
+- Use R with tidyverse unless I specify otherwise
+- Comment every function explaining what it does
+- Use snake_case for all variable and file names
+
+## General behaviour
+- Ask before making structural changes to the project
+- If unsure about something, stop and ask rather than guessing
+- Summarize what you did at the end of each task</code></pre>
+      </div>
+      <p>Commit this file directly to main.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>You can also create a <span class="tt tt-r" data-tip="A CLAUDE.md file stored at ~/.claude/CLAUDE.md on your machine, outside any repository. Instructions here apply to every project you work on, not just one">global CLAUDE.md</span> at <code>~/.claude/CLAUDE.md</code> for preferences that apply across all your projects — things like your coding language preference or how you like Claude to communicate.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Part 2 ─────────────────────────────────────────── -->
+  <div class="guide-section" id="part2" data-terms="codespace terminal">
+    <div class="part-header">
+      <span class="part-badge">Part 2</span>
+      <h2 class="part-title">Launch your Codespace</h2>
+    </div>
+
+    <p>A <span class="tt" data-tip="A complete development environment — essentially a computer — that runs in the cloud inside your browser. It comes with VS Code, a terminal, and your repository files already loaded. Nothing is installed on your personal computer">Codespace</span> is a cloud computer that GitHub provides for you to work in. It has VS Code, a terminal, and your repository already loaded.</p>
+
+    <!-- Step 5 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">5</span>
+        <h3 class="step-title">Create your Codespace</h3>
+      </div>
+      <p>Go to your repository on GitHub. Click the green <strong>"Code"</strong> button. Select the <strong>"Codespaces"</strong> tab. Click <strong>"Create codespace on main"</strong>.</p>
+      <p>GitHub will take 1–2 minutes to spin up your environment. When it finishes, VS Code opens in your browser with your project files on the left.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>Codespaces has a free tier of 120 core-hours per month. A standard 2-core machine gives you 60 hours of free usage per month — more than enough for research work that does not happen every day. Check your usage at <code>github.com/settings/billing</code>.</p>
       </div>
     </div>
 
-    <!-- ─── Section 8 ────────────────────────────────────── -->
-    <div class="guide-section" id="s8" data-terms="docker">
-      <div class="section-heading">
-        <span class="section-num">08</span>
-        <h2>How do I protect my work from Claude making mistakes?</h2>
+    <!-- Step 6 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">6</span>
+        <h3 class="step-title">Open the terminal</h3>
       </div>
-
-      <p>Claude Code is powerful but not infallible. Four layers of protection cover the main risks:</p>
-      <ul>
-        <li><strong>Layer 1 — Git is your safety net.</strong> As long as something is committed, it can always be recovered. Commit frequently.</li>
-        <li><strong>Layer 2 — Branch protection.</strong> Even if Claude tries to push directly to main, GitHub's server rejects it. This is enforced server-side — Claude cannot bypass it.</li>
-        <li><strong>Layer 3 — .gitignore.</strong> Prevents credentials and raw data from ever reaching GitHub, regardless of what Claude does.</li>
-        <li><strong>Layer 4 — Explicit instructions at session start.</strong></li>
-      </ul>
-
-      <div class="code-block">
-        <div class="code-header">
-          <span class="code-lang">prompt</span>
-          <button class="code-download" onclick="downloadCode(this, 'session_instructions.txt')">Download</button>
-        </div>
-        <pre><code>Do not run git push to main. Do not delete files without asking me first.</code></pre>
-      </div>
-
-      <div class="callout callout-note">
-        <span class="callout-label">Advanced — Docker</span>
-        <p><span class="term" data-term="docker">Docker</span> adds a fifth layer by restricting exactly which folders Claude can see. It is worth adding when running Claude autonomously for hours without supervision, or working with truly sensitive data. For solo research with active supervision, the four layers above are sufficient.</p>
-      </div>
+      <p>In VS Code, go to the top menu → <strong>Terminal</strong> → <strong>New Terminal</strong>.</p>
+      <p>A panel opens at the bottom of the screen. This is your <span class="tt" data-tip="A text interface where you control your computer by typing commands. Instead of clicking icons, you type instructions and press Enter. It looks intimidating at first but you only need a small number of commands for everyday work">terminal</span> — where you will type all the commands in the steps that follow.</p>
     </div>
 
-    <!-- ─── Section 9 ────────────────────────────────────── -->
-    <div class="guide-section" id="s9" data-terms="dvc pointer-file content-based-hashing">
-      <div class="section-heading">
-        <span class="section-num">09</span>
-        <h2>What is DVC and why should I use it for research?</h2>
+    <!-- Step 7 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">7</span>
+        <h3 class="step-title">Create your dev branch</h3>
       </div>
-
-      <div class="callout callout-concept">
-        <span class="callout-label">Key concept</span>
-        <p><span class="term" data-term="dvc">DVC (Data Version Control)</span> sits alongside Git and manages your data files the way Git manages your code. Instead of storing large data files in your repository, DVC stores a tiny <span class="term" data-term="pointer-file">pointer file</span> in GitHub and keeps the real data in cloud storage.</p>
-      </div>
-
-      <div class="code-block">
-        <div class="code-header">
-          <span class="code-lang">structure</span>
-          <button class="code-download" onclick="downloadCode(this, 'dvc_structure.txt')">Download</button>
-        </div>
-        <pre><code>GitHub repo
-├── clean_data.csv.dvc    ← tiny pointer file (tracked by Git)
-└── my_script.R           ← actual code (tracked by Git)
-
-Cloud storage (Supabase)
-└── clean_data.csv        ← actual dataset</code></pre>
-      </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Analogy</span>
-        <p>Think of DVC as a luggage tag system. Your GitHub repo holds the tags (small, lightweight). Your cloud storage holds the actual luggage (the data). DVC makes sure every tag always points to the right bag.</p>
-      </div>
-
-      <div class="guide-table-wrap">
-        <table class="guide-table">
-          <thead><tr><th>Situation</th><th>Use DVC?</th></tr></thead>
-          <tbody>
-            <tr><td>Pipeline takes hours or days to run</td><td>Yes — save expensive outputs as checkpoints</td></tr>
-            <tr><td>Data comes from an external source that may disappear</td><td>Yes — preserves exact snapshot</td></tr>
-            <tr><td>Working with a team sharing intermediate outputs</td><td>Yes</td></tr>
-            <tr><td>Fast pipeline, solo project, deterministic outputs</td><td>Probably not — just rerun the code</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>DVC uses <span class="term" data-term="content-based-hashing">content-based hashing</span>, meaning it only stores a new copy when the file actually changed. To clean up old versions:</p>
-
+      <p>The first thing to do in every new Codespace is switch off main onto your working branch. Type this command and press Enter:</p>
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">bash</span>
-          <button class="code-download" onclick="downloadCode(this, 'dvc_gc.sh')">Download</button>
+          <button class="code-download" onclick="downloadCode(this, 'create_dev_branch.sh')">Download</button>
         </div>
-        <pre><code>dvc gc --cloud</code></pre>
+        <pre><code>git checkout -b dev</code></pre>
+      </div>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p><code>git checkout</code> is the command to switch branches. The <code>-b</code> flag means "create this branch if it does not exist yet." From this point, all your work stays on <code>dev</code> and main remains untouched until you deliberately merge.</p>
       </div>
     </div>
+  </div>
 
-    <!-- ─── Section 10 ────────────────────────────────────── -->
-    <div class="guide-section" id="s10" data-terms="s3-compatible">
-      <div class="section-heading">
-        <span class="section-num">10</span>
-        <h2>What cloud storage should I use with DVC?</h2>
-      </div>
-
-      <p>DVC supports any <span class="term" data-term="s3-compatible">S3-compatible storage</span>. You are not locked into Amazon — many services use the same standard.</p>
-
-      <div class="guide-table-wrap">
-        <table class="guide-table">
-          <thead><tr><th>Service</th><th>Free tier</th><th>Best for</th></tr></thead>
-          <tbody>
-            <tr><td>Supabase</td><td>1 GB forever</td><td>Researchers who also want a database</td></tr>
-            <tr><td>Backblaze B2</td><td>10 GB forever</td><td>Pure storage, budget-friendly</td></tr>
-            <tr><td>Cloudflare R2</td><td>10 GB forever</td><td>No download fees</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Why Supabase</span>
-        <p>Beyond storage, Supabase bundles a full PostgreSQL database, authentication, and edge functions in one free account. For a researcher, this means your datasets, structured query results, and project metadata can all live in the same place. Use <code>dvc gc --cloud</code> to keep the 1 GB free tier clean over time.</p>
-      </div>
+  <!-- ─── Part 3 ─────────────────────────────────────────── -->
+  <div class="guide-section" id="part3" data-terms="nodejs npm">
+    <div class="part-header">
+      <span class="part-badge">Part 3</span>
+      <h2 class="part-title">Install Claude Code</h2>
     </div>
 
-    <!-- ─── Section 11 ────────────────────────────────────── -->
-    <div class="guide-section" id="s11" data-terms="dvc-yaml">
-      <div class="section-heading">
-        <span class="section-num">11</span>
-        <h2>How do I structure a reproducible research pipeline?</h2>
+    <!-- Step 8 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">8</span>
+        <h3 class="step-title">Check Node.js is installed</h3>
       </div>
-
-      <div class="callout callout-concept">
-        <span class="callout-label">Key concept</span>
-        <p>A reproducible pipeline means anyone can clone your repository, run one command, and reproduce your entire analysis from raw data to final output. This is the gold standard in research.</p>
-      </div>
-
-      <div class="code-block">
-        <div class="code-header">
-          <span class="code-lang">folder structure</span>
-          <button class="code-download" onclick="downloadCode(this, 'project_structure.txt')">Download</button>
-        </div>
-        <pre><code>project/
-├── Makefile                    ← master pipeline runner
-├── dvc.yaml                    ← DVC pipeline definition
-├── CLAUDE.md                   ← instructions for Claude Code
-├── .gitignore                  ← protects credentials and data
-│
-├── 01_data_processing/
-│   ├── code/                   ← R or Python scripts
-│   ├── hand/                   ← config YAML files
-│   └── output/                 ← tracked by DVC → stored in cloud
-│
-├── 02_cleaning/
-│   ├── code/
-│   ├── hand/
-│   └── output/
-│
-├── 03_covariates/
-├── 04_target/
-├── 05_analysis_dataset/
-├── 06_estimation/
-│
-└── 07_figures_tables/
-    ├── code/
-    ├── output/
-    └── paper.tex               ← LaTeX working paper</code></pre>
-      </div>
-
-      <div class="guide-table-wrap">
-        <table class="guide-table">
-          <thead><tr><th>Location</th><th>Contents</th></tr></thead>
-          <tbody>
-            <tr><td>GitHub repo</td><td>All code, config files, DVC pointer files, Makefile</td></tr>
-            <tr><td>Cloud storage (Supabase)</td><td>All output folders — datasets, figures, tables</td></tr>
-            <tr><td>Codespace</td><td>Your active working environment</td></tr>
-            <tr><td>.env file</td><td>Credentials — never committed, recreated each session</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p><span class="term" data-term="dvc-yaml">dvc.yaml</span> defines each stage and its dependencies so DVC knows what to rerun when something changes. The one-command reproduction:</p>
-
+      <p>Claude Code requires <span class="tt" data-tip="A software runtime that Claude Code depends on to work. You do not use it directly — it just needs to be present on the machine. Think of it like a supporting engine that Claude Code runs on top of">Node.js</span> version 18 or higher. Check by typing:</p>
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">bash</span>
-          <button class="code-download" onclick="downloadCode(this, 'reproduce.sh')">Download</button>
+          <button class="code-download" onclick="downloadCode(this, 'check_node.sh')">Download</button>
         </div>
-        <pre><code>git clone your-repo
-dvc pull        # downloads all data from Supabase
-make all        # runs the full pipeline in order</code></pre>
+        <pre><code>node --version</code></pre>
       </div>
-    </div>
-
-    <!-- ─── Section 12 ────────────────────────────────────── -->
-    <div class="guide-section" id="s12" data-terms="">
-      <div class="section-heading">
-        <span class="section-num">12</span>
-        <h2>What is a typical work session with this setup?</h2>
-      </div>
-
+      <p>If the output shows <code>v18</code> or higher, move to Step 9. If not, run:</p>
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">bash</span>
-          <button class="code-download" onclick="downloadCode(this, 'work_session.sh')">Download</button>
+          <button class="code-download" onclick="downloadCode(this, 'install_node.sh')">Download</button>
         </div>
-        <pre><code># 1. Open your Codespace — code is already there from GitHub
-git pull origin dev       # get latest code
-dvc pull                  # restore data from Supabase
-
-# 2. Do your work — edit scripts, run analysis
-
-# 3. Save everything
-git add 02_cleaning/code/clean.R
-git add 02_cleaning/output/clean.csv.dvc   # pointer, not actual data
-git commit -m "updated cleaning logic"
-git push origin dev       # code → GitHub
-dvc push                  # data → Supabase
-
-# 4. When ready to publish to main
-# Go to GitHub → open Pull Request → review → merge</code></pre>
+        <pre><code>curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs</code></pre>
       </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Tip</span>
-        <p>Notice that you commit the <code>.dvc</code> pointer file, not the actual dataset. The data travels separately via <code>dvc push</code>. This keeps your GitHub repository small and fast regardless of how large your data grows.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p><code>sudo</code> means "run as administrator" — required when installing software on Linux. <code>apt-get</code> is Linux's built-in package manager, similar to an app store for the command line.</p>
       </div>
     </div>
 
-    <!-- ─── Section 13 ────────────────────────────────────── -->
-    <div class="guide-section" id="s13" data-terms="">
-      <div class="section-heading">
-        <span class="section-num">13</span>
-        <h2>How do I write and preview LaTeX documents inside Codespaces?</h2>
+    <!-- Step 9 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">9</span>
+        <h3 class="step-title">Install Claude Code</h3>
       </div>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="code-download" onclick="downloadCode(this, 'install_claude.sh')">Download</button>
+        </div>
+        <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
+      </div>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p><span class="tt" data-tip="Node's package manager — a command-line tool for installing developer software. Similar to an app store that you use from the terminal">npm</span> is Node's package manager. <code>install -g</code> means install globally, making Claude Code available everywhere on this machine. <code>@anthropic-ai/claude-code</code> is the official package name published by Anthropic.</p>
+      </div>
+    </div>
 
-      <p>Install LaTeX and the LaTeX Workshop VS Code extension:</p>
+    <!-- Step 10 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">10</span>
+        <h3 class="step-title">Authenticate Claude Code</h3>
+      </div>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="code-download" onclick="downloadCode(this, 'launch_claude.sh')">Download</button>
+        </div>
+        <pre><code>claude</code></pre>
+      </div>
+      <p>This launches Claude Code for the first time. It will open a browser tab asking you to log in with your Anthropic account — the same one linked to your Pro subscription. Approve it, then return to your terminal.</p>
+      <p>Claude Code will automatically read your <code>CLAUDE.md</code> file and load those instructions. You are now ready to use Claude Code.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>Authentication only needs to happen once per Codespace. If you create a new Codespace in the future, you will repeat this step but it takes less than a minute.</p>
+      </div>
+    </div>
+  </div>
 
+  <!-- ─── Part 4 (Optional) ──────────────────────────────── -->
+  <div class="guide-section" id="part4" data-terms="">
+    <div class="part-header">
+      <span class="part-badge">Part 4</span>
+      <h2 class="part-title">Add LaTeX for document writing</h2>
+      <span class="optional-badge">Optional</span>
+    </div>
+
+    <p>Skip this part if you do not need to write academic papers or formal documents.</p>
+
+    <!-- Step 11 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">11</span>
+        <h3 class="step-title">Update the package list</h3>
+      </div>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="code-download" onclick="downloadCode(this, 'apt_update.sh')">Download</button>
+        </div>
+        <pre><code>sudo apt-get update</code></pre>
+      </div>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>This refreshes the list of available software — like refreshing a catalog before ordering. Always run this before installing new software to avoid "package not found" errors.</p>
+      </div>
+    </div>
+
+    <!-- Step 12 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">12</span>
+        <h3 class="step-title">Install LaTeX</h3>
+      </div>
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">bash</span>
           <button class="code-download" onclick="downloadCode(this, 'install_latex.sh')">Download</button>
         </div>
-        <pre><code>sudo apt-get update
-sudo apt-get install -y texlive-full</code></pre>
+        <pre><code>sudo apt-get install -y texlive-full</code></pre>
       </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Tip</span>
-        <p>This gives you a near-Overleaf experience: auto-compile on save, side-by-side editing, and click-to-source navigation — all inside Codespaces. Claude Code can write and edit your <code>.tex</code> files, compile them, and iterate based on your instructions.</p>
+      <p>This takes several minutes — it is a large package. You can continue to the next step in a second terminal window while it installs.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>To open a second terminal, click the <strong>+</strong> icon in the terminal panel. This lets you run the LaTeX install in the background while you keep working.</p>
       </div>
+    </div>
 
+    <!-- Step 13 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">13</span>
+        <h3 class="step-title">Install the LaTeX Workshop extension</h3>
+      </div>
+      <p>In VS Code, click the <strong>Extensions</strong> icon on the left sidebar (four squares icon). Search for <strong>"LaTeX Workshop"</strong> by James Yu and click <strong>Install</strong>.</p>
+      <p>This gives you a near-Overleaf experience inside your Codespace: PDF preview that updates automatically on save, side-by-side editing, and click-to-source navigation.</p>
+      <p>Once installed, Claude Code can write and edit your <code>.tex</code> files, compile them, and iterate based on plain English instructions:</p>
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">prompt example</span>
           <button class="code-download" onclick="downloadCode(this, 'latex_prompt.txt')">Download</button>
         </div>
-        <pre><code>Condense the introduction to 3 paragraphs and sharpen the contribution statement</code></pre>
+        <pre><code>Condense the introduction to 3 paragraphs and make the contribution clearer</code></pre>
       </div>
+    </div>
+  </div>
 
-      <div class="guide-table-wrap">
-        <table class="guide-table">
-          <thead><tr><th>Feature</th><th>Overleaf</th><th>Codespace + LaTeX Workshop</th></tr></thead>
-          <tbody>
-            <tr><td>Real-time PDF preview</td><td>Yes</td><td>Yes (on save)</td></tr>
-            <tr><td>Side-by-side editing</td><td>Yes</td><td>Yes</td></tr>
-            <tr><td>Works with Claude Code</td><td>No</td><td>Yes</td></tr>
-            <tr><td>Version history</td><td>Yes (built-in)</td><td>Yes (via Git, more powerful)</td></tr>
-            <tr><td>Real-time collaboration</td><td>Yes</td><td>Via GitHub only</td></tr>
-          </tbody>
-        </table>
+  <!-- ─── Part 5 (Optional) ──────────────────────────────── -->
+  <div class="guide-section" id="part5" data-terms="cloud-storage supabase bucket postgresql">
+    <div class="part-header">
+      <span class="part-badge">Part 5</span>
+      <h2 class="part-title">Store your data in the cloud</h2>
+      <span class="optional-badge">Optional</span>
+    </div>
+
+    <p>Skip this part if your project does not involve data files, or if your data is small enough to keep only in your Codespace during active work.</p>
+
+    <p>Your Codespace is <span class="tt" data-tip="Codespaces inactive for 30 days are automatically deleted by GitHub. Your code is always safe because it lives on GitHub, but data files that were never saved elsewhere will be lost">temporary</span>. GitHub itself is not designed for large data files — it has a strict 100MB per file limit and is not meant to store CSVs or datasets. A <span class="tt" data-tip="A remote storage system that keeps your files permanently on internet servers, accessible from any machine at any time. Unlike your Codespace, cloud storage does not get recycled or deleted">cloud storage service</span> is the right place to keep your data safe between sessions.</p>
+
+    <div class="table-wrap">
+      <table class="guide-table">
+        <thead><tr><th>Service</th><th>Free storage</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Supabase</strong></td><td>1 GB forever</td><td>Researchers who also want a database</td></tr>
+          <tr><td>Backblaze B2</td><td>10 GB forever</td><td>Large datasets, budget-friendly</td></tr>
+          <tr><td>Cloudflare R2</td><td>10 GB forever</td><td>Large datasets, no download fees</td></tr>
+          <tr><td>Google Drive</td><td>15 GB forever</td><td>If you already use Google Workspace</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Recommended: Supabase.</strong> Beyond file storage, Supabase includes a full <span class="tt tt-r" data-tip="A powerful, industry-standard database for storing and querying structured data — like a very capable spreadsheet that you can query with code. Supabase gives you one for free alongside your file storage">PostgreSQL database</span> under the same free account. Your data files, cleaned datasets, and structured query results can all live in one place.</p>
+
+    <div class="note-box">
+      <p class="note-label">Note</p>
+      <p>If your project grows to need data version control — tracking which version of your data matched which version of your code — tools like DVC can connect to any of these services. That is an advanced topic beyond this guide, but good to know it is possible.</p>
+    </div>
+
+    <!-- Step 14 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">14</span>
+        <h3 class="step-title">Create a Supabase account and project</h3>
+      </div>
+      <p>Go to supabase.com and sign up using your GitHub account. Click <strong>"New project"</strong> and fill in:</p>
+      <ul>
+        <li><strong>Project name</strong> — use something general like <code>research</code>, since this one project will hold storage <span class="tt tt-r" data-tip="Named containers inside a storage project, similar to folders. Each research project gets its own bucket, keeping everything organized under one Supabase account">buckets</span> for all your future research projects</li>
+        <li><strong>Database password</strong> — save this somewhere safe</li>
+        <li><strong>Region</strong> — pick the closest one to you geographically</li>
+      </ul>
+      <p>Click <strong>"Create new project"</strong> and wait 1–2 minutes.</p>
+    </div>
+
+    <!-- Step 15 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">15</span>
+        <h3 class="step-title">Create a storage bucket</h3>
+      </div>
+      <p>In the Supabase dashboard, click <strong>"Storage"</strong> in the left sidebar → <strong>"New bucket"</strong>.</p>
+      <ul>
+        <li><strong>Bucket name</strong> — name it after your current research project, e.g. <code>housing-study</code>. Use hyphens instead of spaces.</li>
+        <li><strong>Visibility</strong> — set to <strong>Private</strong></li>
+      </ul>
+      <p>Click <strong>"Create bucket"</strong>.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>Private means only you — authenticated with your credentials — can access the files. Always use Private for research data.</p>
       </div>
     </div>
 
-    <!-- ─── Section 14 ────────────────────────────────────── -->
-    <div class="guide-section" id="s14" data-terms="">
-      <div class="section-heading">
-        <span class="section-num">14</span>
-        <h2>What are Skills and how do I use them?</h2>
+    <!-- Step 16 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">16</span>
+        <h3 class="step-title">Get your access credentials</h3>
       </div>
-
-      <div class="callout callout-concept">
-        <span class="callout-label">Key concept</span>
-        <p>Skills are reusable instruction files — markdown documents that tell Claude Code exactly how to handle a specific repeated task. They encode the <strong>ask → confirm → execute</strong> pattern so Claude never surprises you with unwanted changes.</p>
-      </div>
-
-      <div class="code-block">
-        <div class="code-header">
-          <span class="code-lang">structure</span>
-          <button class="code-download" onclick="downloadCode(this, 'skills_folder.txt')">Download</button>
-        </div>
-        <pre><code>skills/
-├── new_section.md      ← how to create a new webpage section
-└── add_project.md      ← how to add a project card to a section</code></pre>
-      </div>
-
-      <p>To invoke a skill, tell Claude Code explicitly:</p>
-
-      <div class="code-block">
-        <div class="code-header">
-          <span class="code-lang">prompt</span>
-          <button class="code-download" onclick="downloadCode(this, 'invoke_skill.txt')">Download</button>
-        </div>
-        <pre><code>Read skills/new_section.md and follow it to create the Applied Projects section</code></pre>
-      </div>
-
-      <p>A well-written skill has three parts: clarifying questions (before touching anything), a confirmation step (Claude summarizes its plan and waits), and execution steps (only after you confirm does Claude write code).</p>
-    </div>
-
-    <!-- ─── Section 15 ────────────────────────────────────── -->
-    <div class="guide-section" id="s15" data-terms="">
-      <div class="section-heading">
-        <span class="section-num">15</span>
-        <h2>What is the difference between Claude.ai and Claude Code's think mode?</h2>
-      </div>
-
-      <p><strong>Claude.ai</strong> builds your understanding. You learn why things work the way they do, develop judgment, and make informed decisions.</p>
-      <p><strong>Claude Code think mode</strong> is Claude reasoning about a specific execution problem. Trigger it by saying:</p>
-
-      <div class="code-block">
-        <div class="code-header">
-          <span class="code-lang">prompt</span>
-          <button class="code-download" onclick="downloadCode(this, 'think_mode.txt')">Download</button>
-        </div>
-        <pre><code>Think carefully about this before doing anything</code></pre>
-      </div>
-
-      <p>Claude Code will pause, reason through the problem, present a step-by-step plan, and wait for your approval before touching any files.</p>
-
-      <div class="workflow-row">
-        <div class="workflow-step">
-          <p class="workflow-step-label">Step 1</p>
-          <p class="workflow-step-text"><strong>Claude.ai</strong><br/>Plan and decide</p>
-        </div>
-        <div class="workflow-step">
-          <p class="workflow-step-label">Step 2</p>
-          <p class="workflow-step-text"><strong>Claude Code (think)</strong><br/>Review the approach</p>
-        </div>
-        <div class="workflow-step">
-          <p class="workflow-step-label">Step 3</p>
-          <p class="workflow-step-text"><strong>Claude Code (execute)</strong><br/>Implement</p>
-        </div>
-      </div>
-
-      <div class="callout callout-tip">
-        <span class="callout-label">Rule of thumb</span>
-        <p>Use Claude.ai when you are stuck on a concept or decision. Use Claude Code when you know what you want built.</p>
-      </div>
-    </div>
-
-  </div><!-- /guide-main -->
-
-  <!-- ─── Sidebar ───────────────────────────────────────────── -->
-  <aside class="guide-sidebar">
-
-    <!-- Table of contents -->
-    <div class="sidebar-block">
-      <p class="sidebar-title">Contents</p>
-      <ul class="toc-list">
-        <li><a href="#s1"  class="toc-item" data-section="s1" ><span class="toc-num">01</span><span class="toc-text">What is Claude Code?</span></a></li>
-        <li><a href="#s2"  class="toc-item" data-section="s2" ><span class="toc-num">02</span><span class="toc-text">Local vs cloud</span></a></li>
-        <li><a href="#s3"  class="toc-item" data-section="s3" ><span class="toc-num">03</span><span class="toc-text">Computing power</span></a></li>
-        <li><a href="#s4"  class="toc-item" data-section="s4" ><span class="toc-num">04</span><span class="toc-text">R, Stata, Python</span></a></li>
-        <li><a href="#s5"  class="toc-item" data-section="s5" ><span class="toc-num">05</span><span class="toc-text">Plans &amp; pricing</span></a></li>
-        <li><a href="#s6"  class="toc-item" data-section="s6" ><span class="toc-num">06</span><span class="toc-text">GitHub setup</span></a></li>
-        <li><a href="#s7"  class="toc-item" data-section="s7" ><span class="toc-num">07</span><span class="toc-text">CLAUDE.md</span></a></li>
-        <li><a href="#s8"  class="toc-item" data-section="s8" ><span class="toc-num">08</span><span class="toc-text">Protecting your work</span></a></li>
-        <li><a href="#s9"  class="toc-item" data-section="s9" ><span class="toc-num">09</span><span class="toc-text">DVC</span></a></li>
-        <li><a href="#s10" class="toc-item" data-section="s10"><span class="toc-num">10</span><span class="toc-text">Cloud storage</span></a></li>
-        <li><a href="#s11" class="toc-item" data-section="s11"><span class="toc-num">11</span><span class="toc-text">Pipeline structure</span></a></li>
-        <li><a href="#s12" class="toc-item" data-section="s12"><span class="toc-num">12</span><span class="toc-text">Work sessions</span></a></li>
-        <li><a href="#s13" class="toc-item" data-section="s13"><span class="toc-num">13</span><span class="toc-text">LaTeX</span></a></li>
-        <li><a href="#s14" class="toc-item" data-section="s14"><span class="toc-num">14</span><span class="toc-text">Skills</span></a></li>
-        <li><a href="#s15" class="toc-item" data-section="s15"><span class="toc-num">15</span><span class="toc-text">Think mode</span></a></li>
+      <p>In the Supabase dashboard, go to <strong>Storage</strong> settings and enable the <strong>S3 Connection</strong> toggle. Click <strong>"Create new key"</strong> and name it <code>storage-access</code>.</p>
+      <p>Copy all three values immediately — the secret key is only shown once:</p>
+      <ul>
+        <li><strong>Endpoint URL</strong> — looks like <code>https://xxxx.supabase.co/storage/v1/s3</code></li>
+        <li><strong>Access Key ID</strong> — a long string of characters</li>
+        <li><strong>Secret Access Key</strong> — a longer string, like a password</li>
       </ul>
     </div>
 
-    <!-- Glossary -->
-    <div class="sidebar-block">
-      <p class="sidebar-title">Glossary</p>
-
-      <div class="gloss-entry" id="term-command-line-tool">
-        <p class="gloss-term">command-line tool</p>
-        <p class="gloss-def">A program you interact with by typing text commands in a terminal window, rather than clicking buttons in a graphical interface.</p>
+    <!-- Step 17 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">17</span>
+        <h3 class="step-title">Save your credentials in the Codespace</h3>
       </div>
-
-      <div class="gloss-entry" id="term-virtual-computer">
-        <p class="gloss-term">virtual computer</p>
-        <p class="gloss-def">A simulated computer that runs on remote servers in the cloud. It behaves exactly like a real computer but exists only as software — you access it through your browser.</p>
+      <p>In your Codespace terminal, create a credentials file:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="code-download" onclick="downloadCode(this, 'create_env.sh')">Download</button>
+        </div>
+        <pre><code>touch .env</code></pre>
       </div>
-
-      <div class="gloss-entry" id="term-machine-types">
-        <p class="gloss-term">machine types</p>
-        <p class="gloss-def">Pre-configured virtual computers with different amounts of CPU, RAM and storage that you choose when creating a Codespace.</p>
+      <p>Open the <code>.env</code> file in VS Code and paste your three values:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">env</span>
+          <button class="code-download" onclick="downloadCode(this, '.env.example')">Download</button>
+        </div>
+        <pre><code>SUPABASE_ENDPOINT=your_endpoint_url_here
+AWS_ACCESS_KEY_ID=your_access_key_here
+AWS_SECRET_ACCESS_KEY=your_secret_key_here</code></pre>
       </div>
-
-      <div class="gloss-entry" id="term-ubuntu-linux">
-        <p class="gloss-term">Ubuntu Linux</p>
-        <p class="gloss-def">A free, open-source operating system widely used on servers and in research computing. It is the same system that runs on most university computing clusters.</p>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>This file is already in your <code>.gitignore</code> so Git will never commit it. You will need to recreate it each time you open a new Codespace — it takes about 30 seconds. Never share these values or paste them into a chat.</p>
       </div>
-
-      <div class="gloss-entry" id="term-main-branch">
-        <p class="gloss-term">main branch</p>
-        <p class="gloss-def">The primary, official version of your project in Git. Think of it as the published version — stable, reviewed, and trusted.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-pull-request">
-        <p class="gloss-term">Pull Request</p>
-        <p class="gloss-def">A formal proposal on GitHub to merge one branch into another. It shows exactly what changed and requires a human to review and approve before the merge happens.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-gitignore">
-        <p class="gloss-term">.gitignore</p>
-        <p class="gloss-def">A file that tells Git which files to never track or commit, no matter what. Files listed here are completely invisible to Git.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-global-claude-md">
-        <p class="gloss-term">global CLAUDE.md</p>
-        <p class="gloss-def">A CLAUDE.md file stored at ~/.claude/CLAUDE.md on your machine, outside any repository. It applies to every project you work on, not just one.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-docker">
-        <p class="gloss-term">Docker</p>
-        <p class="gloss-def">A tool that creates a completely isolated mini-computer (called a container) inside your machine. What happens inside cannot affect anything outside — it is a sealed sandbox.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-dvc">
-        <p class="gloss-term">DVC</p>
-        <p class="gloss-def">Data Version Control — a free, open-source tool that does for data what Git does for code. Tracks versions, stores history, and lets you travel back to any previous state.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-pointer-file">
-        <p class="gloss-term">pointer file</p>
-        <p class="gloss-def">A small text file (ending in .dvc) that lives in your Git repo and contains a fingerprint of the actual data file. Git tracks the pointer; DVC uses it to find the real data in cloud storage.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-content-based-hashing">
-        <p class="gloss-term">content-based hashing</p>
-        <p class="gloss-def">A method of generating a unique fingerprint for a file based on its actual contents. If the content has not changed, the fingerprint is identical and DVC does not upload a duplicate.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-s3-compatible">
-        <p class="gloss-term">S3-compatible</p>
-        <p class="gloss-def">A storage service that speaks the same communication protocol as Amazon S3, meaning any tool built for S3 works with it automatically without special configuration.</p>
-      </div>
-
-      <div class="gloss-entry" id="term-dvc-yaml">
-        <p class="gloss-term">dvc.yaml</p>
-        <p class="gloss-def">A configuration file where you define your pipeline as a sequence of named stages. DVC tracks which stages depend on which, so it only reruns stages affected by your changes.</p>
-      </div>
-
     </div>
-  </aside>
+
+    <p>Once set up, you can upload files to Supabase directly from your Codespace terminal, or let Claude Code handle uploads as part of your pipeline. Your data files live permanently in Supabase while your code lives in GitHub — two separate, complementary stores.</p>
+  </div>
+
+  <!-- ─── Part 6 ─────────────────────────────────────────── -->
+  <div class="guide-section" id="part6" data-terms="">
+    <div class="part-header">
+      <span class="part-badge">Part 6</span>
+      <h2 class="part-title">How to work with Claude Code day to day</h2>
+    </div>
+
+    <!-- Step 18 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">18</span>
+        <h3 class="step-title">Start a session</h3>
+      </div>
+      <p>Every time you open your Codespace to work, start with:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="code-download" onclick="downloadCode(this, 'start_session.sh')">Download</button>
+        </div>
+        <pre><code>git pull origin dev
+claude</code></pre>
+      </div>
+      <p>Give Claude a brief orientation at the start of each session — it has no memory between sessions, so a few sentences of context saves a lot of back-and-forth:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">prompt template</span>
+          <button class="code-download" onclick="downloadCode(this, 'session_start.txt')">Download</button>
+        </div>
+        <pre><code>We are working on [project name]. I am on the dev branch.
+Today's task is [what you want to do]. Read CLAUDE.md before starting.</code></pre>
+      </div>
+    </div>
+
+    <!-- Step 19 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">19</span>
+        <h3 class="step-title">Save your work to GitHub</h3>
+      </div>
+      <p>After Claude Code makes changes you are happy with:</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">bash</span>
+          <button class="code-download" onclick="downloadCode(this, 'save_work.sh')">Download</button>
+        </div>
+        <pre><code>git push origin dev</code></pre>
+      </div>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>This sends your commits from the Codespace up to GitHub. <code>origin</code> means "send to GitHub" and <code>dev</code> specifies which branch. Without this step, your work only exists in the Codespace and could be lost if it is recycled after inactivity.</p>
+      </div>
+    </div>
+
+    <!-- Step 20 -->
+    <div class="step">
+      <div class="step-header">
+        <span class="step-badge">20</span>
+        <h3 class="step-title">Publish finished work to main</h3>
+      </div>
+      <p>When you are satisfied with what is on dev and ready to publish it:</p>
+      <ol>
+        <li>Go to your repository on GitHub</li>
+        <li>Click <strong>"Compare &amp; pull request"</strong> — GitHub shows this automatically when it detects new changes on dev</li>
+        <li>Review what changed — read through the differences carefully</li>
+        <li>Click <strong>"Merge pull request"</strong></li>
+      </ol>
+      <div class="note-box">
+        <p class="note-label">Note</p>
+        <p>This is your deliberate review checkpoint. You see exactly what Claude Code produced before it reaches your main branch. If anything looks wrong, close the pull request without merging and go back to fix it first.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Part 7 ─────────────────────────────────────────── -->
+  <div class="guide-section" id="part7" data-terms="docker">
+    <div class="part-header">
+      <span class="part-badge">Part 7</span>
+      <h2 class="part-title">Protecting your work from mistakes</h2>
+    </div>
+
+    <p>Claude Code is powerful but not infallible. These layers of protection cover the main risks:</p>
+
+    <div class="table-wrap">
+      <table class="guide-table">
+        <thead><tr><th>Risk</th><th>Protection</th></tr></thead>
+        <tbody>
+          <tr><td>Claude pushes bad code to main</td><td>Branch protection — GitHub rejects it server-side</td></tr>
+          <tr><td>Claude commits credentials</td><td>.gitignore — those files are invisible to Git</td></tr>
+          <tr><td>Claude deletes a file you needed</td><td>Git history — any committed file can be recovered</td></tr>
+          <tr><td>Codespace gets recycled</td><td>GitHub — all committed code is always safe</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>For long autonomous tasks, add these instructions at the start of your session:</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">prompt</span>
+        <button class="code-download" onclick="downloadCode(this, 'safety_instructions.txt')">Download</button>
+      </div>
+      <pre><code>Do not push to main under any circumstances.
+Do not delete any files without asking me first.
+Commit after each completed step with a descriptive message.</code></pre>
+    </div>
+
+    <div class="note-box">
+      <p class="note-label">Advanced — Docker</p>
+      <p>For very long autonomous runs that take hours, you can add an extra layer using <span class="tt tt-r" data-tip="A tool that creates a completely isolated container inside your Codespace. Claude Code running inside Docker can only see the specific folders you gave it access to — nothing else on the machine is reachable">Docker</span>. This restricts exactly which folders Claude can see. It is not needed for most research workflows, but worth knowing about as your projects grow.</p>
+    </div>
+  </div>
+
+  <!-- ─── Part 8 ─────────────────────────────────────────── -->
+  <div class="guide-section" id="part8" data-terms="skill">
+    <div class="part-header">
+      <span class="part-badge">Part 8</span>
+      <h2 class="part-title">Using Skills to standardize repeated tasks</h2>
+    </div>
+
+    <p><strong>Skills</strong> are reusable instruction files stored in a <code>skills/</code> folder in your repository. Each skill is a markdown file that tells Claude Code exactly how to handle a specific task — like a recipe it follows on demand.</p>
+    <p>A well-written skill always has three parts:</p>
+    <ol>
+      <li><strong>Clarifying questions</strong> — Claude asks before touching anything</li>
+      <li><strong>Confirmation</strong> — Claude summarizes the plan and waits for your approval</li>
+      <li><strong>Execution</strong> — only after you confirm does Claude write any code</li>
+    </ol>
+
+    <p>To invoke a skill, tell Claude Code explicitly which skill to follow:</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">prompt</span>
+        <button class="code-download" onclick="downloadCode(this, 'invoke_skill.txt')">Download</button>
+      </div>
+      <pre><code>Read skills/add_figure.md and follow it</code></pre>
+    </div>
+
+    <div class="note-box">
+      <p class="note-label">Note</p>
+      <p>The filename alone is not enough — Claude Code does not automatically read skill files just because they exist. You must tell it to read the file in your instruction. You can add reminders in your <code>CLAUDE.md</code> such as "When adding a new figure, always read <code>skills/add_figure.md</code> first" so Claude is prompted automatically.</p>
+    </div>
+  </div>
+
+  <!-- ─── Quick Reference ────────────────────────────────── -->
+  <div class="guide-section" id="quickref" data-terms="">
+    <div class="part-header">
+      <h2 class="part-title">Quick reference</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="guide-table">
+        <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>claude</code></td><td>Launch Claude Code in your terminal</td></tr>
+          <tr><td><code>git checkout -b dev</code></td><td>Create and switch to the dev branch</td></tr>
+          <tr><td><code>git pull origin dev</code></td><td>Get the latest code from GitHub</td></tr>
+          <tr><td><code>git push origin dev</code></td><td>Send your commits up to GitHub</td></tr>
+          <tr><td><code>git status</code></td><td>See which files have changed locally</td></tr>
+          <tr><td><code>git log --oneline</code></td><td>See your recent commit history</td></tr>
+          <tr><td><code>node --version</code></td><td>Check that Node.js is installed</td></tr>
+          <tr><td><code>sudo apt-get update</code></td><td>Refresh the list of installable software</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ─── Glossary ───────────────────────────────────────── -->
+  <div class="guide-section" id="glossary-section" data-terms="">
+    <div class="part-header">
+      <h2 class="part-title">Glossary</h2>
+    </div>
+
+    <div class="glossary-grid">
+      <div class="glossary-item"><p class="gloss-term-main">Repository</p><p class="gloss-def-main">A folder on GitHub storing all files for one project along with their full change history</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Branch</p><p class="gloss-def-main">A parallel version of your project where you can work freely without affecting main</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Main branch</p><p class="gloss-def-main">The primary, official version of your project — stable, reviewed, and trusted</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Dev branch</p><p class="gloss-def-main">Your active working branch where all development happens before review</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Commit</p><p class="gloss-def-main">A saved snapshot of your project at a specific moment, with a message describing the change</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Pull Request</p><p class="gloss-def-main">A proposal to merge changes from one branch into another, requiring your review and approval</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">.gitignore</p><p class="gloss-def-main">A file listing paths that Git should never track or upload</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">CLAUDE.md</p><p class="gloss-def-main">An instruction file that Claude Code reads automatically at the start of every session</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Terminal</p><p class="gloss-def-main">A text interface where you control your computer by typing commands</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Codespace</p><p class="gloss-def-main">A complete cloud development environment that runs inside your browser</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Node.js</p><p class="gloss-def-main">A software runtime that Claude Code depends on to function</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">npm</p><p class="gloss-def-main">Node's package manager — a command-line tool for installing developer software</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Skill</p><p class="gloss-def-main">A markdown instruction file telling Claude Code how to handle a specific repeated task</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Docker</p><p class="gloss-def-main">A tool that creates an isolated container limiting what Claude Code can access on the machine</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Cloud storage</p><p class="gloss-def-main">A permanent remote storage system for files, accessible from any machine</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Supabase</p><p class="gloss-def-main">A cloud platform offering free file storage and a PostgreSQL database under one account</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">Bucket</p><p class="gloss-def-main">A named container inside a Supabase project used to organize files by research project</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">PostgreSQL database</p><p class="gloss-def-main">A powerful database for storing and querying structured data, included free with Supabase</p></div>
+      <div class="glossary-item"><p class="gloss-term-main">.env</p><p class="gloss-def-main">A local file storing private credentials — never committed to GitHub</p></div>
+    </div>
+  </div>
+
+</div><!-- /guide-main -->
+
+<!-- ─── Sidebar ───────────────────────────────────────────── -->
+<aside class="guide-sidebar">
+
+  <!-- TOC -->
+  <div class="sidebar-block">
+    <p class="sidebar-title">Contents</p>
+    <ul class="toc-list">
+      <li><a href="#before"           class="toc-item" data-section="before"          ><span class="toc-num">—</span><span class="toc-text">Before you start</span></a></li>
+      <li><a href="#part1"            class="toc-item" data-section="part1"           ><span class="toc-num">01</span><span class="toc-text">GitHub repository</span></a></li>
+      <li><a href="#part2"            class="toc-item" data-section="part2"           ><span class="toc-num">02</span><span class="toc-text">Launch Codespace</span></a></li>
+      <li><a href="#part3"            class="toc-item" data-section="part3"           ><span class="toc-num">03</span><span class="toc-text">Install Claude Code</span></a></li>
+      <li><a href="#part4"            class="toc-item" data-section="part4"           ><span class="toc-num">04</span><span class="toc-text">LaTeX (optional)</span></a></li>
+      <li><a href="#part5"            class="toc-item" data-section="part5"           ><span class="toc-num">05</span><span class="toc-text">Cloud storage (optional)</span></a></li>
+      <li><a href="#part6"            class="toc-item" data-section="part6"           ><span class="toc-num">06</span><span class="toc-text">Day to day work</span></a></li>
+      <li><a href="#part7"            class="toc-item" data-section="part7"           ><span class="toc-num">07</span><span class="toc-text">Protecting your work</span></a></li>
+      <li><a href="#part8"            class="toc-item" data-section="part8"           ><span class="toc-num">08</span><span class="toc-text">Skills</span></a></li>
+      <li><a href="#quickref"         class="toc-item" data-section="quickref"        ><span class="toc-num">—</span><span class="toc-text">Quick reference</span></a></li>
+      <li><a href="#glossary-section" class="toc-item" data-section="glossary-section"><span class="toc-num">—</span><span class="toc-text">Glossary</span></a></li>
+    </ul>
+  </div>
+
+  <!-- Glossary sidebar -->
+  <div class="sidebar-block">
+    <p class="sidebar-title">Glossary</p>
+
+    <div class="gloss-entry" id="term-repository">
+      <p class="gloss-term">repository</p>
+      <p class="gloss-def">A folder on GitHub that stores all files for one project, along with the full history of every change.</p>
+    </div>
+    <div class="gloss-entry" id="term-main-branch">
+      <p class="gloss-term">main branch</p>
+      <p class="gloss-def">The primary, official version of your project — stable, reviewed, and trusted.</p>
+    </div>
+    <div class="gloss-entry" id="term-pull-request">
+      <p class="gloss-term">Pull Request</p>
+      <p class="gloss-def">A proposal to merge changes from one branch to another, requiring your review and approval.</p>
+    </div>
+    <div class="gloss-entry" id="term-gitignore">
+      <p class="gloss-term">.gitignore</p>
+      <p class="gloss-def">A file listing paths that Git should never track or upload, no matter what.</p>
+    </div>
+    <div class="gloss-entry" id="term-claudemd">
+      <p class="gloss-term">CLAUDE.md</p>
+      <p class="gloss-def">An instruction file Claude Code reads automatically at the start of every session.</p>
+    </div>
+    <div class="gloss-entry" id="term-codespace">
+      <p class="gloss-term">Codespace</p>
+      <p class="gloss-def">A complete cloud development environment that runs inside your browser.</p>
+    </div>
+    <div class="gloss-entry" id="term-terminal">
+      <p class="gloss-term">terminal</p>
+      <p class="gloss-def">A text interface where you control your computer by typing commands.</p>
+    </div>
+    <div class="gloss-entry" id="term-nodejs">
+      <p class="gloss-term">Node.js</p>
+      <p class="gloss-def">A software runtime that Claude Code depends on to function.</p>
+    </div>
+    <div class="gloss-entry" id="term-npm">
+      <p class="gloss-term">npm</p>
+      <p class="gloss-def">Node's package manager — a command-line tool for installing developer software.</p>
+    </div>
+    <div class="gloss-entry" id="term-cloud-storage">
+      <p class="gloss-term">cloud storage</p>
+      <p class="gloss-def">A permanent remote storage system for files, accessible from any machine at any time.</p>
+    </div>
+    <div class="gloss-entry" id="term-supabase">
+      <p class="gloss-term">Supabase</p>
+      <p class="gloss-def">A cloud platform offering free file storage and a database under one account.</p>
+    </div>
+    <div class="gloss-entry" id="term-bucket">
+      <p class="gloss-term">bucket</p>
+      <p class="gloss-def">A named container inside Supabase used to organize files by project.</p>
+    </div>
+    <div class="gloss-entry" id="term-postgresql">
+      <p class="gloss-term">PostgreSQL database</p>
+      <p class="gloss-def">A powerful database for storing and querying structured data, included free with Supabase.</p>
+    </div>
+    <div class="gloss-entry" id="term-docker">
+      <p class="gloss-term">Docker</p>
+      <p class="gloss-def">A tool that creates an isolated container limiting what Claude Code can access on the machine.</p>
+    </div>
+    <div class="gloss-entry" id="term-skill">
+      <p class="gloss-term">skill</p>
+      <p class="gloss-def">A markdown instruction file telling Claude Code how to handle a specific repeated task.</p>
+    </div>
+
+  </div>
+</aside>
 
 </div><!-- /guide-layout -->
 
@@ -1378,27 +1575,24 @@ sudo apt-get install -y texlive-full</code></pre>
 </footer>
 
 <script>
-  /* ─── TOC + Glossary: track active section ──────────────── */
-  const tocItems   = document.querySelectorAll('.toc-item');
-  const glossItems = document.querySelectorAll('.gloss-entry');
+  /* ─── TOC + Glossary: highlight active section ──────────── */
+  const tocLinks  = document.querySelectorAll('.toc-item');
+  const glossEntries = document.querySelectorAll('.gloss-entry');
 
-  const sectionObserver = new IntersectionObserver((entries) => {
+  const obs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const id = entry.target.id;
 
-      /* Update TOC */
-      tocItems.forEach(a => a.classList.toggle('active', a.dataset.section === id));
-
-      /* Scroll TOC item into view inside sidebar */
+      /* TOC */
+      tocLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
       const activeToc = document.querySelector(`.toc-item[data-section="${id}"]`);
       if (activeToc) activeToc.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
-      /* Update glossary */
-      const termsAttr = entry.target.dataset.terms || '';
-      const activeTerms = termsAttr.split(' ').filter(Boolean);
-      glossItems.forEach(el => el.classList.remove('active'));
-      activeTerms.forEach(key => {
+      /* Glossary */
+      const terms = (entry.target.dataset.terms || '').split(' ').filter(Boolean);
+      glossEntries.forEach(el => el.classList.remove('active'));
+      terms.forEach(key => {
         const el = document.getElementById('term-' + key);
         if (el) {
           el.classList.add('active');
@@ -1406,22 +1600,19 @@ sudo apt-get install -y texlive-full</code></pre>
         }
       });
     });
-  }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
+  }, { rootMargin: '-8% 0px -55% 0px', threshold: 0 });
 
-  document.querySelectorAll('.guide-section').forEach(s => sectionObserver.observe(s));
+  document.querySelectorAll('.guide-section').forEach(s => obs.observe(s));
 
-  /* ─── Code block download ───────────────────────────────── */
+  /* ─── Code download ─────────────────────────────────────── */
   function downloadCode(btn, filename) {
     const code = btn.closest('.code-block').querySelector('code').textContent;
     const blob = new Blob([code], { type: 'text/plain' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
-    a.href = url;
-    a.download = filename || 'snippet.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    a.href = url; a.download = filename || 'snippet.txt';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
   }
 </script>
 
