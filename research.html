@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research — Ricardo Avalos</title>
+
+  <!-- Fonts: Playfair Display (display) + Source Serif 4 (body) + DM Mono (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ─── Tokens ──────────────────────────────────────────── */
+    :root {
+      --cream:   #f5f0e8;
+      --paper:   #faf7f2;
+      --ink:     #1a1714;
+      --ink-mid: #4a4540;
+      --ink-light: #8a8078;
+      --rust:    #b85c38;
+      --rust-light: #d4795a;
+      --sage:    #5a6b5d;
+      --gold:    #c8a96e;
+      --border:  #ddd8ce;
+      --shadow:  rgba(26,23,20,0.08);
+
+      --ff-display: 'Playfair Display', Georgia, serif;
+      --ff-body:    'Source Serif 4', Georgia, serif;
+      --ff-mono:    'DM Mono', monospace;
+
+      --max-w: 1100px;
+      --nav-h: 64px;
+    }
+
+    /* ─── Reset & Base ────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Noise texture overlay ───────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-name {
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--rust);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--rust); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--rust); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ─── Page Header ─────────────────────────────────────── */
+    .page-header {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+    }
+
+    .page-header-title {
+      font-family: var(--ff-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .page-header-desc {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      max-width: 620px;
+      line-height: 1.8;
+    }
+
+    /* ─── Section Divider ─────────────────────────────────── */
+    .section-sep {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-sep hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── Research List ───────────────────────────────────── */
+    .research-section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
+    }
+
+    .research-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ─── Paper Item ──────────────────────────────────────── */
+    .paper-item {
+      padding: 1.8rem 0 1.8rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .paper-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .paper-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--rust);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s;
+    }
+
+    .paper-item:hover::before { transform: scaleY(1); }
+
+    .paper-title {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 0.45rem;
+      transition: color 0.2s;
+    }
+
+    .paper-item:hover .paper-title { color: var(--rust); }
+
+    .paper-meta {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+
+    .paper-meta .paper-journal {
+      font-family: var(--ff-body);
+      font-style: italic;
+      color: var(--sage);
+      font-size: 0.82rem;
+      letter-spacing: 0;
+    }
+
+    /* ─── Abstract Toggle ─────────────────────────────────── */
+    .paper-abstract-toggle {
+      margin-top: 0.8rem;
+    }
+
+    .paper-abstract-toggle summary {
+      display: inline-block;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+      list-style: none;
+      user-select: none;
+    }
+
+    .paper-abstract-toggle summary::-webkit-details-marker { display: none; }
+
+    .paper-abstract-toggle summary::after {
+      content: ' +';
+      color: var(--rust);
+    }
+
+    .paper-abstract-toggle[open] summary::after {
+      content: ' −';
+    }
+
+    .paper-abstract-toggle summary:hover {
+      color: var(--rust);
+      border-color: var(--rust);
+    }
+
+    .paper-abstract-text {
+      margin-top: 0.9rem;
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      max-width: 720px;
+      padding-left: 0.2rem;
+      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+    }
+
+    /* ─── Paper Link ──────────────────────────────────────── */
+    .paper-link {
+      display: inline-block;
+      margin-top: 0.9rem;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: white;
+      background: var(--rust);
+      border: 1px solid var(--rust);
+      border-radius: 2px;
+      padding: 0.4em 1.1em;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .paper-link:hover {
+      background: var(--rust-light);
+      border-color: var(--rust-light);
+    }
+
+    /* ─── Placeholder ─────────────────────────────────────── */
+    .coming-soon {
+      padding: 4rem 2rem;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: 3px;
+      margin-top: 2rem;
+    }
+
+    .coming-soon-text {
+      font-family: var(--ff-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--ink-light);
+    }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-name {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+    }
+
+    .footer-col-title {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-links a {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--rust); }
+
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 2rem auto 0;
+      padding: 1.5rem 2rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      color: var(--ink-light);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Responsive ──────────────────────────────────────── */
+    @media (max-width: 560px) {
+      .footer-inner  { grid-template-columns: 1fr; }
+      .nav-links     { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Nav ─────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Ricardo Avalos</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="research.html" class="active">Research</a></li>
+      <li><a href="applied_projects.html">Applied Projects</a></li>
+      <li><a href="ricardoavalos_cv.pdf" target="_blank">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── Page Header ───────────────────────────────────────── -->
+<div class="page-header">
+  <h1 class="page-header-title">Research</h1>
+  <p class="page-header-desc">Academic and applied research in labor economics, human capital, natural resource economics, and applied econometrics.</p>
+</div>
+
+<div class="section-sep"><hr/></div>
+
+<!-- ─── Research List ────────────────────────────────────── -->
+<div class="research-section">
+  <div class="research-list">
+
+    <div class="paper-item">
+      <h2 class="paper-title">Is there always time for everything? How time allocation affects cognitive skill development during school years</h2>
+      <p class="paper-meta">
+        Ricardo Antonio Avalos Uribe &nbsp;·&nbsp; 2021 &nbsp;·&nbsp;
+        <span class="paper-journal">Working Paper</span>
+      </p>
+      <details class="paper-abstract-toggle">
+        <summary>Abstract</summary>
+        <p class="paper-abstract-text">This paper examines how children's time allocation across competing activities—work, household chores, caregiving, and leisure—affects the development of their cognitive skills during school years. Drawing on the household decision-making framework and the educational production function, a value-added model is estimated using five rounds (2002–2016) of the Young Lives longitudinal survey for Peru. Results show that time devoted to household chores and work has a significant negative contemporaneous effect on Peabody Picture Vocabulary Test (PPVT) scores. Long-term negative effects are found for chores and early-age work at around age 8. Disaggregating by sex and area of residence, household chores primarily affect urban girls, while work primarily affects boys—with contemporaneous effects for rural boys and long-term effects for urban boys.</p>
+      </details>
+      <a href="content/research/use_of_time_child_development/avalos_uribe_time_child_development.pdf" target="_blank" class="paper-link">PDF →</a>
+    </div>
+
+  </div>
+
+  <div class="coming-soon">
+    <p class="coming-soon-text">More papers coming soon.</p>
+  </div>
+</div>
+
+<!-- ─── Footer ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-name">Ricardo Avalos</p>
+      <p class="footer-tagline">Applied Economist &amp; Researcher</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sections</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="applied_projects.html">Applied Projects</a></li>
+        <li><a href="ricardoavalos_cv.pdf" target="_blank">CV</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <ul class="footer-links">
+        <li><a href="mailto:ricardo.av.ur@gmail.com">ricardo.av.ur@gmail.com</a></li>
+        <li><a href="https://github.com/ricardo-avalos" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/ricardo-antonio-avalos-uribe/" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Ricardo Avalos Uribe</span>
+    <span>Applied Economist</span>
+  </div>
+</footer>
+
+</body>
+</html>
